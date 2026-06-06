@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diekmann & Poiss - Building Greenery Software</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .gradient-green {
+            background: linear-gradient(135deg, #d4f1e4 0%, #e8f8f0 100%);
+        }
+        
+        .leaf-accent {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .leaf-accent::after {
+            content: '🌿';
+            margin-left: 8px;
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(139, 179, 114, 0.15);
+        }
+        
+        .nav-link {
+            color: #4a7c5e;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #2d5a3f;
+        }
+        
+        .cta-button {
+            background-color: #8bb372;
+            color: white;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            border-radius: 8px;
+            padding: 12px 28px;
+        }
+        
+        .cta-button:hover {
+            background-color: #6d8f58;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            border: 1px solid #d4f1e4;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/95 backdrop-blur-sm z-50 border-b border-green-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-green-700">
+                🌿 Diekmann & Poiss
+            </div>
+            <div class="flex gap-8 items-center">
+                <a href="#features" class="nav-link hidden md:block">Features</a>
+                <a href="#about" class="nav-link hidden md:block">About</a>
+                <a href="#contact" class="nav-link hidden md:block">Contact</a>
+                <a href="https://trashman997-ctrl.github.io" class="cta-button">Try Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 gradient-green relative overflow-hidden">
+        <div class="absolute top-20 right-10 text-7xl opacity-10">🌱</div>
+        <div class="absolute bottom-10 left-5 text-6xl opacity-10">🍃</div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-5xl md:text-6xl font-bold text-green-900 leading-tight mb-6">
+                        Design Tomorrow's <span class="leaf-accent">Green Spaces</span>
+                    </h1>
+                    <p class="text-lg text-green-800 mb-8 leading-relaxed">
+                        Innovative software solutions for architects and urban planners. Simplify the design, planning, and implementation of vertical gardens, green roofs, and building-integrated greenery.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="https://trashman997-ctrl.github.io" class="cta-button">Start Planning</a>
+                        <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="border-2 border-green-700 text-green-700 font-600 rounded-lg px-7 py-3 hover:bg-green-50 transition">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-gradient-to-br from-green-200 to-green-100 rounded-2xl p-8 h-96 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="text-8xl mb-4">🏗️</div>
+                            <p class="text-green-700 font-semibold">Interactive 3D Garden Planner</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-green-900 mb-4">
+                Powerful Features for Modern Design
+            </h2>
+            <p class="text-center text-green-800 mb-16 max-w-2xl mx-auto">
+                Everything architects and planners need to create sustainable, beautiful green spaces.
+            </p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Feature 1 -->
+                <div class="feature-card hover-lift">
+                    <div class="text-4xl mb-4">🎨</div>
+                    <h3 class="text-xl font-bold text-green-900 mb-3">Drag-and-Drop Design</h3>
+                    <p class="text-green-700">Intuitive interface for designing vertical gardens and green walls without technical expertise.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card hover-lift">
+                    <div class="text-4xl mb-4">🌾</div>
+                    <h3 class="text-xl font-bold text-green-900 mb-3">Plant Database</h3>
+                    <p class="text-green-700">Curated species library with climate, sunlight, and maintenance filtering for optimal selections.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card hover-lift">
+                    <div class="text-4xl mb-4">🎭</div>
+                    <h3 class="text-xl font-bold text-green-900 mb-3">3D Visualization</h3>
+                    <p class="text-green-700">Preview your designs in stunning 3D using WebGL technology for realistic rendering.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card hover-lift">
+                    <div class="text-4xl mb-4">👥</div>
+                    <h3 class="text-xl font-bold text-green-900 mb-3">Team Collaboration</h3>
+                    <p class="text-green-700">Share, iterate, and collaborate on designs with colleagues, clients, and stakeholders.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card hover-lift">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-xl font-bold text-green-900 mb-3">Data Insights</h3>
+                    <p class="text-green-700">Generate maintenance schedules, cost estimates, and sustainability metrics.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card hover-lift">
+                    <div class="text-4xl mb-4">🗺️</div>
+                    <h3 class="text-xl font-bold text-green-900 mb-3">GeoJSON Support</h3>
+                    <p class="text-green-700">Work with geographic data for precise location-based green infrastructure planning.</p>
+                </div>
+
+                <!-- Feature 7 -->
+                <div class="feature-card hover-lift">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h3 class="text-xl font-bold text-green-900 mb-3">Real-time Updates</h3>
+                    <p class="text-green-700">See changes instantly with our responsive, modern architecture powered by React.</p>
+                </div>
+
+                <!-- Feature 8 -->
+                <div class="feature-card hover-lift">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="text-xl font-bold text-green-900 mb-3">Responsive Design</h3>
+                    <p class="text-green-700">Access your projects from desktop, tablet, or mobile devices seamlessly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="py-20 bg-green-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-green-900 mb-16">
+                Built on Modern Technology
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="bg-white rounded-xl p-8 border border-green-100">
+                    <h3 class="text-2xl font-bold text-green-900 mb-6">Frontend</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">React</span>
+                        <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">TypeScript</span>
+                        <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">Tailwind CSS</span>
+                        <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">TanStack Start</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 border border-green-100">
+                    <h3 class="text-2xl font-bold text-green-900 mb-6">Backend & Data</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">Node.js</span>
+                        <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">Express</span>
+                        <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">GeoJSON</span>
+                        <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">RESTful APIs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-green-900 mb-8">About Diekmann & Poiss</h2>
+            
+            <div class="prose prose-green max-w-none">
+                <p class="text-lg text-green-800 leading-relaxed mb-6">
+                    We combine <strong>technology and nature</strong> to create sustainable, smart, and beautiful green spaces. Our mission is to empower architects, urban planners, and green building enthusiasts with innovative tools that simplify complex design challenges.
+                </p>
+                
+                <p class="text-lg text-green-800 leading-relaxed mb-6">
+                    Whether you're designing a vertical garden for a residential building, planning a green roof installation, or integrating greenery into urban infrastructure, our platform provides the tools and insights you need to succeed.
+                </p>
+
+                <h3 class="text-2xl font-bold text-green-900 mt-12 mb-4">Our Vision</h3>
+                <p class="text-lg text-green-800 leading-relaxed">
+                    To transform how the built environment integrates with nature by making sustainable green design accessible, intuitive, and rewarding for every professional.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 gradient-green">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-green-900 mb-8">Get in Touch</h2>
+            <p class="text-lg text-green-800 mb-12">
+                We'd love to hear from architects, planners, and partners interested in building the future of green infrastructure.
+            </p>
+
+            <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
+                <!-- Email -->
+                <a href="mailto:hello@diekmannpoiss.com" class="flex items-center gap-4 bg-white rounded-lg p-6 border border-green-200 hover:border-green-400 transition w-full md:w-auto">
+                    <div class="text-3xl">✉️</div>
+                    <div class="text-left">
+                        <p class="text-sm text-green-600 font-medium">Email</p>
+                        <p class="text-lg font-semibold text-green-900">hello@diekmannpoiss.com</p>
+                    </div>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://linkedin.com/company/diekmann-poiss" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-white rounded-lg p-6 border border-green-200 hover:border-green-400 transition w-full md:w-auto">
+                    <div class="text-3xl">💼</div>
+                    <div class="text-left">
+                        <p class="text-sm text-green-600 font-medium">LinkedIn</p>
+                        <p class="text-lg font-semibold text-green-900">Diekmann & Poiss</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-green-200">
+                <p class="text-green-700 text-sm">
+                    © 2026 Diekmann & Poiss. Building greenery software for architects and planners worldwide.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
