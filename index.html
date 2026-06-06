@@ -3,220 +3,394 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diekmann & Poiss</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Diekmann & Poiss — Building Greenery Software</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        * {
-            font-family: 'Georgia', serif;
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --off-white: #f5f3ef;
+            --dark: #1a1f1c;
+            --mid: #3d4840;
+            --muted: #8a9490;
+            --accent: #6b9e7a;
+            --border: rgba(26,31,28,0.12);
         }
-        
+
+        html { scroll-behavior: smooth; }
+
         body {
-            background: linear-gradient(135deg, #fafaf8 0%, #f0f5f2 100%);
+            background: var(--off-white);
+            color: var(--dark);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
         }
-        
-        .pastel-green {
-            background: linear-gradient(135deg, #e8f5f0 0%, #d4f1e4 100%);
+
+        /* ── NAV ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 3rem;
+            mix-blend-mode: difference;
         }
-        
-        .green-text {
-            color: #5a7d6e;
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; font-weight: 400;
+            color: #fff; letter-spacing: 0.03em;
         }
-        
-        .dark-green {
-            color: #3d5550;
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a {
+            font-size: 0.72rem; font-weight: 400; letter-spacing: 0.15em;
+            text-transform: uppercase; color: #fff;
+            text-decoration: none; transition: opacity 0.2s;
         }
-        
-        .nav-link {
-            text-decoration: none;
-            color: #3d5550;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+        .nav-links a:hover { opacity: 0.6; }
+
+        /* ── HERO ── */
+        #hero {
+            position: relative;
+            height: 100vh; min-height: 600px;
+            overflow: hidden;
+            display: flex; align-items: flex-end;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: #2a3d30;
+            background-image: url('LoniceraHeck.JPG');
+            background-size: cover; background-position: center 40%;
+            transform: scale(1.04);
+            transition: transform 12s ease-out;
+        }
+        .hero-bg.loaded { transform: scale(1); }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(10,16,12,0.15) 0%,
+                rgba(10,16,12,0.0) 40%,
+                rgba(10,16,12,0.55) 100%
+            );
+        }
+        .hero-content {
+            position: relative; z-index: 2;
+            padding: 0 3rem 3.5rem;
+            width: 100%;
+            display: flex; justify-content: space-between; align-items: flex-end;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 400; line-height: 0.95;
+            color: #fff; letter-spacing: -0.02em;
+        }
+        .hero-title em { font-style: italic; }
+        .hero-tagline {
+            font-size: 0.78rem; font-weight: 400; letter-spacing: 0.18em;
+            text-transform: uppercase; color: rgba(255,255,255,0.7);
+            text-align: right; line-height: 1.8;
+            padding-bottom: 0.5rem;
+        }
+        .hero-scroll {
+            position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+            z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px;
+        }
+        .hero-scroll span {
+            font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+        }
+        .scroll-line {
+            width: 1px; height: 48px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+            animation: scrollpulse 2s ease-in-out infinite;
+        }
+        @keyframes scrollpulse {
+            0%, 100% { opacity: 0.4; transform: scaleY(1); transform-origin: top; }
+            50% { opacity: 1; }
+        }
+
+        /* ── SECTIONS ── */
+        section { border-top: 1px solid var(--border); }
+
+        /* ── INTRO ── */
+        #intro {
+            display: grid; grid-template-columns: 1fr 2fr;
+        }
+        .intro-label {
+            padding: 4rem 3rem;
+            border-right: 1px solid var(--border);
+            display: flex; align-items: flex-start;
+        }
+        .intro-label span {
+            font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--muted); writing-mode: horizontal-tb;
+        }
+        .intro-body {
+            padding: 4rem 3rem 4rem 4rem;
+        }
+        .intro-body p {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 400; line-height: 1.45;
+            color: var(--dark); max-width: 680px;
+        }
+
+        /* ── SERVICES ── */
+        #services {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+        }
+        .service-tile {
+            padding: 3rem;
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s ease;
+        }
+        .service-tile:nth-child(even) { border-right: none; }
+        .service-tile:nth-child(3), .service-tile:nth-child(4) { border-bottom: none; }
+        .service-tile:hover { background: rgba(107,158,122,0.06); }
+        .service-num {
+            font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted);
+            text-transform: uppercase; margin-bottom: 2rem;
+        }
+        .service-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.45rem; font-weight: 400; line-height: 1.2;
+            color: var(--dark); margin-bottom: 1rem;
+        }
+        .service-desc {
+            font-size: 0.88rem; line-height: 1.75;
+            color: var(--muted); max-width: 320px;
+        }
+
+        /* ── IMAGE BAND ── */
+        #image-band {
+            height: 55vh; min-height: 360px;
+            overflow: hidden; border-top: 1px solid var(--border);
             position: relative;
         }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: #8bb372;
-            transition: width 0.3s ease;
+        #image-band img {
+            width: 100%; height: 100%; object-fit: cover; object-position: center 60%;
+            display: block;
+            filter: saturate(0.85);
         }
-        
-        .nav-link:hover::after {
-            width: 100%;
+        .band-caption {
+            position: absolute; bottom: 1.5rem; right: 2rem;
+            font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
         }
-        
-        .hero-image {
-            aspect-ratio: 4/5;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(139, 179, 114, 0.2);
+
+        /* ── CONTACT ── */
+        #contact {
+            display: grid; grid-template-columns: 1fr 1fr;
+            min-height: 480px;
         }
-        
-        .contact-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #8bb372;
+        .contact-left {
+            padding: 5rem 3rem;
+            background: var(--dark); color: #fff;
+            display: flex; flex-direction: column; justify-content: space-between;
         }
-        
-        .divider-accent {
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #8bb372, transparent);
-            margin: 2rem 0;
+        .contact-kicker {
+            font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+            color: rgba(255,255,255,0.4); margin-bottom: 1.5rem;
+        }
+        .contact-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400; line-height: 1.05; letter-spacing: -0.02em;
+        }
+        .contact-email {
+            display: inline-block;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; font-weight: 400;
+            color: rgba(255,255,255,0.75);
+            text-decoration: none; letter-spacing: 0.01em;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 3px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .contact-email:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
+
+        .contact-right {
+            border-left: 1px solid var(--border);
+            display: grid; grid-template-rows: 1fr 1fr;
+        }
+        .team-member {
+            padding: 2.5rem 3rem;
+            border-bottom: 1px solid var(--border);
+            display: flex; flex-direction: column; justify-content: space-between;
+            transition: background 0.3s;
+        }
+        .team-member:last-child { border-bottom: none; }
+        .team-member:hover { background: rgba(107,158,122,0.05); }
+        .member-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem; font-weight: 400;
+            color: var(--dark);
+        }
+        .member-linkedin {
+            font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--muted); text-decoration: none;
+            transition: color 0.2s;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .member-linkedin:hover { color: var(--accent); }
+        .member-linkedin::after { content: '↗'; font-size: 0.85em; }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 1.25rem 3rem;
+            border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        footer span {
+            font-size: 0.72rem; letter-spacing: 0.08em; color: var(--muted);
+        }
+
+        /* ── FADE IN ── */
+        .reveal {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible { opacity: 1; transform: none; }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        @media (max-width: 768px) {
+            nav { padding: 1.2rem 1.5rem; }
+            .hero-content { padding: 0 1.5rem 2.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .hero-tagline { text-align: left; }
+            #intro { grid-template-columns: 1fr; }
+            .intro-label { display: none; }
+            .intro-body { padding: 3rem 1.5rem; }
+            #services { grid-template-columns: 1fr; }
+            .service-tile { border-right: none; border-bottom: 1px solid var(--border); }
+            .service-tile:last-child { border-bottom: none; }
+            #contact { grid-template-columns: 1fr; }
+            .contact-right { border-left: none; border-top: 1px solid var(--border); }
+            .contact-left { padding: 3.5rem 1.5rem; }
+            .team-member { padding: 2rem 1.5rem; }
+            footer { padding: 1rem 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/80 border-b border-green-100">
-        <div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
-            <div class="text-2xl font-light dark-green">Diekmann & Poiss</div>
-            <div class="flex gap-8">
-                <a href="/" class="nav-link">Home</a>
-                <a href="/contact" class="nav-link">Contact</a>
-            </div>
+
+    <nav>
+        <div class="nav-logo">Diekmann & Poiss</div>
+        <div class="nav-links">
+            <a href="#intro">Work</a>
+            <a href="#contact">Contact</a>
         </div>
     </nav>
 
-    <!-- Landing Page -->
-    <div id="home" class="page min-h-screen pt-32 pb-20">
-        <div class="max-w-7xl mx-auto px-8">
-            
-            <!-- Header -->
-            <div class="mb-16 text-center">
-                <h1 class="text-6xl md:text-7xl font-light dark-green mb-4 tracking-tight">Diekmann & Poiss</h1>
-                <p class="text-2xl green-text font-light">Building Greenery Software</p>
-            </div>
-
-            <!-- Hero Layout -->
-            <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
-                <!-- Large Image -->
-                <div class="flex justify-center">
-                    <img src="LoniceraHeck.JPG" alt="Lonicera Heckrottii climbing plant" class="hero-image">
-                </div>
-
-                <!-- Content -->
-                <div>
-                    <h2 class="text-4xl font-light dark-green mb-8">What We Do</h2>
-                    <ul class="space-y-6">
-                        <li class="flex items-start gap-4">
-                            <span class="dark-green text-2xl font-light">→</span>
-                            <span class="green-text text-lg leading-relaxed">Design and planning tools for vertical gardens, green roofs, and building-integrated greenery</span>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <span class="dark-green text-2xl font-light">→</span>
-                            <span class="green-text text-lg leading-relaxed">Interactive 3D visualization and plant database for architects and urban planners</span>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <span class="dark-green text-2xl font-light">→</span>
-                            <span class="green-text text-lg leading-relaxed">Collaboration features for teams and clients to iterate on sustainable design projects</span>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <span class="dark-green text-2xl font-light">→</span>
-                            <span class="green-text text-lg leading-relaxed">Data-driven insights and analysis for green infrastructure implementation</span>
-                        </li>
-                    </ul>
-                </div>
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-bg" id="heroBg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Diekmann<br><em>& Poiss</em></h1>
+            <div class="hero-tagline">
+                Digital Solutions an Consulting for the <br>Green Branch
             </div>
         </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- INTRO -->
+    <section id="intro">
+        <div class="intro-label">
+            <span>About</span>
+        </div>
+        <div class="intro-body">
+            <p class="reveal">We provide software and consulting for working with living architecture — indoor and outdoor</p>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <div class="service-tile reveal">
+            <div class="service-num">01</div>
+            <div class="service-name">Design &<br>Planning Tools</div>
+            <div class="service-desc">Precision tools for vertical greening systems, green roofs, and building-integrated greenery, indoor and outdoor</div>
+        </div>
+        <div class="service-tile reveal reveal-delay-1">
+            <div class="service-num">02</div>
+            <div class="service-name">Consulting</div>
+            <div class="service-desc">Tegether we create living structures that work.</div>
+        </div>
+        <div class="service-tile reveal reveal-delay-2">
+            <div class="service-num">03</div>
+            <div class="service-name">Vegetation Technology</div>
+            <div class="service-desc">We understand plants from the ground up.</div>
+        </div>
+        <div class="service-tile reveal reveal-delay-3">
+            <div class="service-num">04</div>
+            <div class="service-name">Science-Driven<br>Insights</div>
+            <div class="service-desc">Research based competency of green infrastructure implementation and environmental impacts.</div>
+        </div>
+    </section>
+
+    <!-- IMAGE BAND -->
+    <div id="image-band">
+        <img src="Wisteria4.JPG" alt="Wisteria plant detail" onerror="this.parentElement.style.background='#2a3d30'">
+        <div class="band-caption">Wisteria — structural climber</div>
     </div>
 
-    <!-- Contact Page -->
-    <div id="contact" class="page min-h-screen pt-32 pb-20 hidden">
-        <div class="max-w-2xl mx-auto px-8">
-            
-            <!-- Header -->
-            <div class="text-center mb-20">
-                <h1 class="text-5xl font-light dark-green mb-4">Get in Touch</h1>
-                <p class="text-lg green-text">Let's create something beautiful together</p>
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="contact-left reveal">
+            <div>
+                <div class="contact-kicker">Get in touch</div>
+                <h2 class="contact-heading">Let's build<br><em>something</em><br>beautiful.</h2>
             </div>
-
-            <!-- Contact Content -->
-            <div class="space-y-16">
-                
-                <!-- Email Section -->
-                <div class="text-center">
-                    <p class="text-sm green-text uppercase tracking-widest mb-4 font-semibold">Email</p>
-                    <a href="mailto:diekmann-poiss@proton.me" class="text-2xl dark-green hover:text-green-700 transition font-light">diekmann-poiss@proton.me</a>
-                </div>
-
-                <div class="divider-accent"></div>
-
-                <!-- Team Section -->
-                <div>
-                    <h2 class="text-3xl font-light dark-green text-center mb-12">Our Team</h2>
-                    
-                    <!-- Fridtjof Diekmann -->
-                    <div class="text-center mb-16">
-                        <div class="flex justify-center mb-6">
-                            <img src="Wisteria4.JPG" alt="Fridtjof Diekmann" class="contact-image">
-                        </div>
-                        <h3 class="text-2xl font-light dark-green mb-2">Fridtjof Diekmann</h3>
-                        <a href="https://www.linkedin.com/in/fridtjof-diekmann-36a61b246" target="_blank" rel="noopener noreferrer" class="text-lg green-text hover:dark-green transition">
-                            www.linkedin.com/in/fridtjof-diekmann-36a61b246
-                        </a>
-                    </div>
-
-                    <!-- Max Poiss -->
-                    <div class="text-center">
-                        <div class="flex justify-center mb-6">
-                            <img src="Wisteria4.JPG" alt="Max Poiss" class="contact-image">
-                        </div>
-                        <h3 class="text-2xl font-light dark-green mb-2">Max Poiss</h3>
-                        <a href="https://www.linkedin.com/in/max-poiss-0866b222b" target="_blank" rel="noopener noreferrer" class="text-lg green-text hover:dark-green transition">
-                            www.linkedin.com/in/max-poiss-0866b222b
-                        </a>
-                    </div>
-                </div>
-
+            <a href="mailto:diekmann-poiss@proton.me" class="contact-email">diekmann-poiss@proton.me</a>
+        </div>
+        <div class="contact-right">
+            <div class="team-member reveal">
+                <div class="member-name">Fridtjof<br>Diekmann</div>
+                <a href="https://www.linkedin.com/in/fridtjof-diekmann-36a61b246" target="_blank" rel="noopener" class="member-linkedin">LinkedIn</a>
             </div>
-
-            <!-- Back Button -->
-            <div class="text-center mt-20">
-                <button onclick="showPage('home')" class="text-lg green-text hover:dark-green transition font-light">← Back to Home</button>
+            <div class="team-member reveal reveal-delay-1">
+                <div class="member-name">Max<br>Poiss</div>
+                <a href="https://www.linkedin.com/in/max-poiss-0866b222b" target="_blank" rel="noopener" class="member-linkedin">LinkedIn</a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Footer -->
-    <footer class="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md border-t border-green-100 py-4">
-        <div class="max-w-7xl mx-auto px-8 text-center">
-            <p class="text-sm green-text">© 2026 Diekmann & Poiss</p>
-        </div>
+    <footer>
+        <span>© 2026 Diekmann & Poiss</span>
+        <span>Vienna, Austria</span>
     </footer>
 
     <script>
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.add('hidden');
-            });
-            // Show selected page
-            document.getElementById(pageId).classList.remove('hidden');
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
-
-        // Handle navigation links
-        document.querySelectorAll('a[href^="/"]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const page = link.getAttribute('href').substring(1) || 'home';
-                showPage(page);
-            });
-        });
-
-        // Handle page load from URL
         window.addEventListener('load', () => {
-            const hash = window.location.hash.substring(1) || 'home';
-            showPage(hash);
+            const bg = document.getElementById('heroBg');
+            const img = new Image();
+            img.onload = () => bg.classList.add('loaded');
+            img.src = 'LoniceraHeck.JPG';
         });
+
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        reveals.forEach(el => observer.observe(el));
+
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            const bg = document.querySelector('.hero-bg');
+            if (bg) bg.style.transform = `scale(1) translateY(${y * 0.3}px)`;
+        }, { passive: true });
     </script>
 </body>
 </html>
