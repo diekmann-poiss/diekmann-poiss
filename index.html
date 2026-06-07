@@ -39,12 +39,14 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.1rem; font-weight: 400;
             color: #fff; letter-spacing: 0.03em;
+            cursor: pointer;
         }
         .nav-links { display: flex; gap: 2.5rem; }
         .nav-links a {
             font-size: 0.72rem; font-weight: 400; letter-spacing: 0.15em;
             text-transform: uppercase; color: #fff;
             text-decoration: none; transition: opacity 0.2s;
+            cursor: pointer;
         }
         .nav-links a:hover { opacity: 0.6; }
 
@@ -294,6 +296,121 @@
             font-size: 0.72rem; letter-spacing: 0.08em; color: var(--muted);
         }
 
+        /* ── PAGE VISIBILITY ── */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* ── SOFTWARE PAGE ── */
+        #software-hero {
+            position: relative;
+            height: 60vh; min-height: 400px;
+            overflow: hidden;
+            display: flex; align-items: center; justify-content: flex-start;
+            background: linear-gradient(135deg, #2a3d30 0%, #1a2822 100%);
+        }
+        .software-hero-content {
+            position: relative; z-index: 2;
+            padding: 0 3rem;
+            max-width: 800px;
+        }
+        .software-hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 400; line-height: 1.05;
+            color: #fff; letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+        .software-hero-desc {
+            font-size: 1rem; line-height: 1.6;
+            color: rgba(255,255,255,0.75);
+            max-width: 600px;
+        }
+
+        .software-tools {
+            padding: 5rem 3rem;
+        }
+
+        .tool-section {
+            margin-bottom: 6rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .tool-section:last-child {
+            border-bottom: none;
+        }
+
+        .tool-header {
+            margin-bottom: 3rem;
+        }
+
+        .tool-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 400;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            line-height: 1.1;
+        }
+
+        .tool-status {
+            display: inline-block;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #fff;
+            background: var(--accent);
+            padding: 0.4rem 0.8rem;
+            border-radius: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .tool-description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--muted);
+            max-width: 700px;
+            margin-bottom: 2.5rem;
+        }
+
+        .tool-screenshots {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .screenshot {
+            flex: 0 1 calc(33.333% - 1.35rem);
+            min-width: 250px;
+            aspect-ratio: 3/4;
+            border-radius: 8px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #e8f5f0 0%, #d4f1e4 100%);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .screenshot.two-col {
+            flex: 0 1 calc(50% - 1rem);
+        }
+
+        .screenshot.single {
+            flex: 0 1 calc(33.333% - 1.35rem);
+        }
+
         /* ── FADE IN ── */
         .reveal {
             opacity: 0; transform: translateY(28px);
@@ -319,118 +436,205 @@
             footer { padding: 1rem 1.5rem; }
             .member-skills { justify-content: center; }
             .member-linkedin { justify-content: center; }
+            
+            .software-hero-content { padding: 0 1.5rem; }
+            .software-tools { padding: 3rem 1.5rem; }
+            .tool-section { margin-bottom: 4rem; padding-bottom: 3rem; }
+            .tool-screenshots { gap: 1rem; }
+            .screenshot { flex: 0 1 calc(50% - 0.5rem); }
+            .screenshot.two-col { flex: 0 1 100%; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="nav-logo">Diekmann & Poiss</div>
+        <div class="nav-logo" onclick="showPage('home')">Diekmann & Poiss</div>
         <div class="nav-links">
-            <a href="#services">Work</a>
+            <a onclick="showPage('home')">Work</a>
+            <a onclick="showPage('software')">Software</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <section id="hero">
-        <div class="hero-bg" id="heroBg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">Diekmann<br><em>& Poiss</em></h1>
-            <div class="hero-tagline">
-                Digital Solutions and consulting in <br>Building greenery
-            </div>
-        </div>
-        <div class="hero-scroll">
-            <span>Scroll</span>
-            <div class="scroll-line"></div>
-        </div>
-    </section>
-
-    <!-- INTRO -->
-    <section id="intro">
-        <div class="intro-body">
-            <p class="reveal">We provide software and consulting for working with living architecture — indoor and outdoor</p>
-        </div>
-    </section>
-
-   <!-- IMAGE BAND -->
-    <div id="image-band">
-        <img src="Schwarzau4.JPG" alt="Green Wall Project" onerror="this.parentElement.style.background='#2a3d30'">
-        <div class="band-caption"></div>
-    </div>
-    
-    <!-- SERVICES -->
-    <section id="services">
-        <div class="service-tile reveal">
-            <div class="service-num">01</div>
-            <div class="service-name">Design &<br>Planning Tools</div>
-            <div class="service-desc">Precision tools for vertical greening systems, green roofs, and building-integrated greenery, indoor and outdoor</div>
-        </div>
-        <div class="service-tile reveal reveal-delay-1">
-            <div class="service-num">02</div>
-            <div class="service-name">Consulting</div>
-            <div class="service-desc">Tegether we create living structures that work.</div>
-        </div>
-        <div class="service-tile reveal reveal-delay-2">
-            <div class="service-num">03</div>
-            <div class="service-name">Vegetation Technology</div>
-            <div class="service-desc">We understand plants from the ground up.</div>
-        </div>
-        <div class="service-tile reveal reveal-delay-3">
-            <div class="service-num">04</div>
-            <div class="service-name">Science-Driven<br>Insights</div>
-            <div class="service-desc">Research based competency of green infrastructure implementation and environmental impacts.</div>
-        </div>
-    </section>
-
-    <!-- IMAGE BAND -->
-    <div id="image-band">
-        <img src="Wisteria4.JPG" alt="Wisteria plant detail" onerror="this.parentElement.style.background='#2a3d30'">
-        <div class="band-caption"></div>
-    </div>
-
-    <!-- CONTACT -->
-    <section id="contact">
-        <div class="contact-left reveal">
-            <div>
-                <div class="contact-kicker">Get in touch</div>
-                <h2 class="contact-heading">Let's build<br><em>something</em><br>beautiful.</h2>
-            </div>
-            <a href="mailto:diekmann-poiss@proton.me" class="contact-email">diekmann-poiss@proton.me</a>
-        </div>
-        <div class="contact-right">
-            <div class="team-member reveal">
-                <div class="member-image-container">
-                    <div class="member-image-placeholder">+</div>
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <!-- HERO -->
+        <section id="hero">
+            <div class="hero-bg" id="heroBg"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Diekmann<br><em>& Poiss</em></h1>
+                <div class="hero-tagline">
+                    Digital Solutions and consulting in <br>Building greenery
                 </div>
-                <div class="member-content">
-                    <div class="member-name">Fridtjof<br>Diekmann</div>
-                    <div class="member-skills">
-                        <span class="skill-badge">Green infrastructure construction</span>
-                        <span class="skill-badge">Green Roofs</span>
-                        <span class="skill-badge">Soil and substrate technology</span>
+            </div>
+            <div class="hero-scroll">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- INTRO -->
+        <section id="intro">
+            <div class="intro-body">
+                <p class="reveal">We provide software and consulting for working with living architecture — indoor and outdoor</p>
+            </div>
+        </section>
+
+        <!-- IMAGE BAND -->
+        <div id="image-band">
+            <img src="Schwarzau4.JPG" alt="Green Wall Project" onerror="this.parentElement.style.background='#2a3d30'">
+            <div class="band-caption"></div>
+        </div>
+        
+        <!-- SERVICES -->
+        <section id="services">
+            <div class="service-tile reveal">
+                <div class="service-num">01</div>
+                <div class="service-name">Design &<br>Planning Tools</div>
+                <div class="service-desc">Precision tools for vertical greening systems, green roofs, and building-integrated greenery, indoor and outdoor</div>
+            </div>
+            <div class="service-tile reveal reveal-delay-1">
+                <div class="service-num">02</div>
+                <div class="service-name">Consulting</div>
+                <div class="service-desc">Tegether we create living structures that work.</div>
+            </div>
+            <div class="service-tile reveal reveal-delay-2">
+                <div class="service-num">03</div>
+                <div class="service-name">Vegetation Technology</div>
+                <div class="service-desc">We understand plants from the ground up.</div>
+            </div>
+            <div class="service-tile reveal reveal-delay-3">
+                <div class="service-num">04</div>
+                <div class="service-name">Science-Driven<br>Insights</div>
+                <div class="service-desc">Research based competency of green infrastructure implementation and environmental impacts.</div>
+            </div>
+        </section>
+
+        <!-- IMAGE BAND -->
+        <div id="image-band">
+            <img src="Wisteria4.JPG" alt="Wisteria plant detail" onerror="this.parentElement.style.background='#2a3d30'">
+            <div class="band-caption"></div>
+        </div>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <div class="contact-left reveal">
+                <div>
+                    <div class="contact-kicker">Get in touch</div>
+                    <h2 class="contact-heading">Let's build<br><em>something</em><br>beautiful.</h2>
+                </div>
+                <a href="mailto:diekmann-poiss@proton.me" class="contact-email">diekmann-poiss@proton.me</a>
+            </div>
+            <div class="contact-right">
+                <div class="team-member reveal">
+                    <div class="member-image-container">
+                        <div class="member-image-placeholder">+</div>
                     </div>
-                    <a href="https://www.linkedin.com/in/fridtjof-diekmann-36a61b246" target="_blank" rel="noopener" class="member-linkedin">LinkedIn</a>
-                </div>
-            </div>
-            <div class="team-member reveal reveal-delay-1">
-                <div class="member-image-container">
-                    <img src="ProfileMax.jpg" alt="Max Poiss" class="member-image">
-                </div>
-                <div class="member-content">
-                    <div class="member-name">Max<br>Poiss</div>
-                    <div class="member-skills">
-                        <span class="skill-badge">Thermal regulation through building greenery</span>
-                        <span class="skill-badge">Vegetation technology</span>
-                        <span class="skill-badge">Plant physiology</span>
+                    <div class="member-content">
+                        <div class="member-name">Fridtjof<br>Diekmann</div>
+                        <div class="member-skills">
+                            <span class="skill-badge">Green infrastructure construction</span>
+                            <span class="skill-badge">Green Roofs</span>
+                            <span class="skill-badge">Soil and substrate technology</span>
+                        </div>
+                        <a href="https://www.linkedin.com/in/fridtjof-diekmann-36a61b246" target="_blank" rel="noopener" class="member-linkedin">LinkedIn</a>
                     </div>
-                    <a href="https://www.linkedin.com/in/max-poiss-0866b222b" target="_blank" rel="noopener" class="member-linkedin">LinkedIn</a>
+                </div>
+                <div class="team-member reveal reveal-delay-1">
+                    <div class="member-image-container">
+                        <img src="ProfileMax.jpg" alt="Max Poiss" class="member-image">
+                    </div>
+                    <div class="member-content">
+                        <div class="member-name">Max<br>Poiss</div>
+                        <div class="member-skills">
+                            <span class="skill-badge">Thermal regulation through building greenery</span>
+                            <span class="skill-badge">Vegetation technology</span>
+                            <span class="skill-badge">Plant physiology</span>
+                        </div>
+                        <a href="https://www.linkedin.com/in/max-poiss-0866b222b" target="_blank" rel="noopener" class="member-linkedin">LinkedIn</a>
+                    </div>
                 </div>
             </div>
+        </section>
+    </div>
+
+    <!-- SOFTWARE PAGE -->
+    <div id="software" class="page">
+        <!-- HERO -->
+        <section id="software-hero">
+            <div class="software-hero-content">
+                <h1 class="software-hero-title">Our Software</h1>
+                <p class="software-hero-desc">Precision tools for designing, analyzing, and implementing building-integrated greenery systems.</p>
+            </div>
+        </section>
+
+        <!-- TOOLS -->
+        <div class="software-tools">
+            
+            <!-- GRETA -->
+            <div class="tool-section reveal">
+                <div class="tool-header">
+                    <h2 class="tool-name">GRETA</h2>
+                    <span class="tool-status">In Development</span>
+                    <p class="tool-description">Vertical greening system and species selection tool</p>
+                </div>
+                <div class="tool-screenshots">
+                    <p style="font-size: 0.9rem; color: var(--muted); margin-top: 1rem;">Screenshots coming soon</p>
+                </div>
+            </div>
+
+            <!-- INGRID -->
+            <div class="tool-section reveal reveal-delay-1">
+                <div class="tool-header">
+                    <h2 class="tool-name">INGRID</h2>
+                    <p class="tool-description">Indoor Greening Identification (species selection) tool with easy on-site smartphone measurements</p>
+                </div>
+                <div class="tool-screenshots">
+                    <div class="screenshot two-col">
+                        <img src="placeholder-ingrid-1.jpg" alt="INGRID screenshot 1" onerror="this.parentElement.textContent='Screenshot 1'">
+                    </div>
+                    <div class="screenshot two-col">
+                        <img src="placeholder-ingrid-2.jpg" alt="INGRID screenshot 2" onerror="this.parentElement.textContent='Screenshot 2'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- AquaCalc -->
+            <div class="tool-section reveal reveal-delay-2">
+                <div class="tool-header">
+                    <h2 class="tool-name">AquaCalc</h2>
+                    <p class="tool-description">FAO-56 species and site specific water demand calculator</p>
+                </div>
+                <div class="tool-screenshots">
+                    <div class="screenshot">
+                        <img src="placeholder-aquacalc-1.jpg" alt="AquaCalc screenshot 1" onerror="this.parentElement.textContent='Screenshot 1'">
+                    </div>
+                    <div class="screenshot">
+                        <img src="placeholder-aquacalc-2.jpg" alt="AquaCalc screenshot 2" onerror="this.parentElement.textContent='Screenshot 2'">
+                    </div>
+                    <div class="screenshot">
+                        <img src="placeholder-aquacalc-3.jpg" alt="AquaCalc screenshot 3" onerror="this.parentElement.textContent='Screenshot 3'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- GreenSight -->
+            <div class="tool-section reveal reveal-delay-3">
+                <div class="tool-header">
+                    <h2 class="tool-name">GreenSight</h2>
+                    <p class="tool-description">On-site plant coverage measurement tool</p>
+                </div>
+                <div class="tool-screenshots">
+                    <div class="screenshot single">
+                        <img src="placeholder-greensight-1.jpg" alt="GreenSight screenshot" onerror="this.parentElement.textContent='Screenshot'">
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </section>
+    </div>
 
     <footer>
         <span>© 2026 Diekmann & Poiss</span>
@@ -438,11 +642,21 @@
     </footer>
 
     <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
         window.addEventListener('load', () => {
             const bg = document.getElementById('heroBg');
-            const img = new Image();
-            img.onload = () => bg.classList.add('loaded');
-            img.src = 'LoniceraHeck.JPG';
+            if (bg) {
+                const img = new Image();
+                img.onload = () => bg.classList.add('loaded');
+                img.src = 'LoniceraHeck.JPG';
+            }
         });
 
         const reveals = document.querySelectorAll('.reveal');
