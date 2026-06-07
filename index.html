@@ -68,7 +68,7 @@
         .hero-bg {
             position: absolute; inset: 0;
             background: #2a3d30;
-            background-image: url('LoniceraHen.JPG');
+            background-image: url('LoniceraHeck.JPG');
             background-size: cover; background-position: center 40%;
             transform: scale(1.04);
             transition: transform 12s ease-out;
@@ -316,14 +316,21 @@
             justify-content: flex-start; align-items: flex-start;
         }
         .screenshot {
-            flex: 0 1 auto; width: 220px;
-            aspect-ratio: 1170 / 2532; border-radius: 12px; overflow: hidden;
+            flex: 0 0 auto;
+            width: 220px;
+            border-radius: 12px; overflow: hidden;
             background: linear-gradient(135deg, #e8f5f0 0%, #d4f1e4 100%);
             border: 1px solid var(--border); display: flex; align-items: center;
             justify-content: center; color: var(--muted);
             font-size: 0.85rem; text-align: center; padding: 1rem;
         }
-        .screenshot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+        .screenshot:has(img[src]) { padding: 0; }
 
         /* ── REVEAL ── */
         .reveal {
@@ -355,7 +362,7 @@
             .software-tools { padding: 3rem 1.5rem; }
             .tool-section { margin-bottom: 4rem; padding-bottom: 3rem; }
             .tool-screenshots { gap: 1rem; }
-            .screenshot { width: 160px; }
+            .screenshot { width: 140px; }
         }
     </style>
 </head>
