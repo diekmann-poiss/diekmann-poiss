@@ -183,7 +183,7 @@
         /* ── CONTACT ── */
         #contact {
             display: grid; grid-template-columns: 1fr 1fr;
-            min-height: 480px;
+            min-height: auto;
         }
         .contact-left {
             padding: 5rem 3rem;
@@ -213,21 +213,73 @@
 
         .contact-right {
             border-left: 1px solid var(--border);
-            display: grid; grid-template-rows: 1fr 1fr;
+            display: flex;
+            flex-direction: column;
         }
         .team-member {
-            padding: 2.5rem 3rem;
+            padding: 3rem;
             border-bottom: 1px solid var(--border);
-            display: flex; flex-direction: column; justify-content: space-between;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
             transition: background 0.3s;
         }
         .team-member:last-child { border-bottom: none; }
         .team-member:hover { background: rgba(107,158,122,0.05); }
+
+        .member-image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--accent);
+        }
+
+        .member-image-placeholder {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--accent);
+            background: linear-gradient(135deg, #e8f5f0 0%, #d4f1e4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 2.5rem;
+        }
+
         .member-name {
             font-family: 'Playfair Display', serif;
-            font-size: 1.6rem; font-weight: 400;
+            font-size: 1.4rem; font-weight: 400;
             color: var(--dark);
+            margin-bottom: 1rem;
+            line-height: 1.2;
         }
+
+        .member-skills {
+            display: flex;
+            gap: 0.6rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-badge {
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            background: rgba(107,158,122,0.08);
+            padding: 0.5rem 0.9rem;
+            border-radius: 20px;
+            border: 1px solid rgba(107,158,122,0.2);
+        }
+
         .member-linkedin {
             font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
             color: var(--muted); text-decoration: none;
@@ -352,11 +404,23 @@
         </div>
         <div class="contact-right">
             <div class="team-member reveal">
+                <div class="member-image-placeholder">+</div>
                 <div class="member-name">Fridtjof<br>Diekmann</div>
+                <div class="member-skills">
+                    <span class="skill-badge">Skill 1</span>
+                    <span class="skill-badge">Skill 2</span>
+                    <span class="skill-badge">Skill 3</span>
+                </div>
                 <a href="https://www.linkedin.com/in/fridtjof-diekmann-36a61b246" target="_blank" rel="noopener" class="member-linkedin">LinkedIn</a>
             </div>
             <div class="team-member reveal reveal-delay-1">
+                <img src="ProfileMax.JPEG" alt="Max Poiss" class="member-image">
                 <div class="member-name">Max<br>Poiss</div>
+                <div class="member-skills">
+                    <span class="skill-badge">Skill 1</span>
+                    <span class="skill-badge">Skill 2</span>
+                    <span class="skill-badge">Skill 3</span>
+                </div>
                 <a href="https://www.linkedin.com/in/max-poiss-0866b222b" target="_blank" rel="noopener" class="member-linkedin">LinkedIn</a>
             </div>
         </div>
