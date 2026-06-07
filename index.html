@@ -377,13 +377,14 @@
             gap: 2rem;
             flex-wrap: wrap;
             justify-content: flex-start;
+            align-items: flex-start;
         }
 
         .screenshot {
-            flex: 0 1 calc(33.333% - 1.35rem);
-            min-width: 250px;
-            aspect-ratio: 3/4;
-            border-radius: 8px;
+            flex: 0 1 auto;
+            width: 220px;
+            aspect-ratio: 1170 / 2532;
+            border-radius: 12px;
             overflow: hidden;
             background: linear-gradient(135deg, #e8f5f0 0%, #d4f1e4 100%);
             border: 1px solid var(--border);
@@ -401,14 +402,6 @@
             height: 100%;
             object-fit: cover;
             display: block;
-        }
-
-        .screenshot.two-col {
-            flex: 0 1 calc(50% - 1rem);
-        }
-
-        .screenshot.single {
-            flex: 0 1 calc(33.333% - 1.35rem);
         }
 
         /* ── FADE IN ── */
@@ -441,8 +434,7 @@
             .software-tools { padding: 3rem 1.5rem; }
             .tool-section { margin-bottom: 4rem; padding-bottom: 3rem; }
             .tool-screenshots { gap: 1rem; }
-            .screenshot { flex: 0 1 calc(50% - 0.5rem); }
-            .screenshot.two-col { flex: 0 1 100%; }
+            .screenshot { width: 160px; }
         }
     </style>
 </head>
@@ -498,7 +490,7 @@
             <div class="service-tile reveal reveal-delay-1">
                 <div class="service-num">02</div>
                 <div class="service-name">Consulting</div>
-                <div class="service-desc">Tegether we create living structures that work.</div>
+                <div class="service-desc">Together we create living structures that work.</div>
             </div>
             <div class="service-tile reveal reveal-delay-2">
                 <div class="service-num">03</div>
@@ -508,7 +500,7 @@
             <div class="service-tile reveal reveal-delay-3">
                 <div class="service-num">04</div>
                 <div class="service-name">Science-Driven<br>Insights</div>
-                <div class="service-desc">Research based competency of green infrastructure implementation and environmental impacts.</div>
+                <div class="service-desc">Research-based competency of green infrastructure implementation and environmental impacts.</div>
             </div>
         </section>
 
@@ -566,7 +558,7 @@
         <section id="software-hero">
             <div class="software-hero-content">
                 <h1 class="software-hero-title">Our Software</h1>
-                <p class="software-hero-desc">Tools for designing, analyzing, and implementing building-integrated greenery systems.</p>
+                <p class="software-hero-desc">Tools for designing, analysing, and implementing building-integrated greenery systems.</p>
             </div>
         </section>
 
@@ -589,13 +581,13 @@
             <div class="tool-section reveal reveal-delay-1">
                 <div class="tool-header">
                     <h2 class="tool-name">INGRID</h2>
-                    <p class="tool-description">INdoor GReening IDentification (species selection) tool with easy on-site smartphone measurements</p>
+                    <p class="tool-description">Indoor Greening Identification (species selection) tool with easy on-site smartphone measurements</p>
                 </div>
                 <div class="tool-screenshots">
-                    <div class="screenshot two-col">
+                    <div class="screenshot">
                         <img src="placeholder-ingrid-1.jpg" alt="INGRID screenshot 1" onerror="this.parentElement.textContent='Screenshot 1'">
                     </div>
-                    <div class="screenshot two-col">
+                    <div class="screenshot">
                         <img src="placeholder-ingrid-2.jpg" alt="INGRID screenshot 2" onerror="this.parentElement.textContent='Screenshot 2'">
                     </div>
                 </div>
@@ -605,7 +597,7 @@
             <div class="tool-section reveal reveal-delay-2">
                 <div class="tool-header">
                     <h2 class="tool-name">AquaCalc</h2>
-                    <p class="tool-description">FAO-56 species and site specific water demand calculator</p>
+                    <p class="tool-description">FAO-56 species and site-specific water demand calculator</p>
                 </div>
                 <div class="tool-screenshots">
                     <div class="screenshot">
@@ -627,7 +619,7 @@
                     <p class="tool-description">On-site plant coverage measurement tool</p>
                 </div>
                 <div class="tool-screenshots">
-                    <div class="screenshot single">
+                    <div class="screenshot">
                         <img src="Greensight.PNG" alt="GreenSight screenshot" onerror="this.parentElement.textContent='Screenshot'">
                     </div>
                 </div>
