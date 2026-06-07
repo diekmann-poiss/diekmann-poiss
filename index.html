@@ -70,8 +70,6 @@
             background: #2a3d30;
             background-image: url('LoniceraHeck.JPG');
             background-size: cover; background-position: center 40%;
-            transform: scale(1.04);
-            transition: transform 12s ease-out;
             will-change: transform;
         }
         .hero-bg.loaded { transform: scale(1); }
@@ -371,7 +369,9 @@
     <nav>
         <button class="nav-logo" onclick="showPage('home')">Diekmann & Poiss</button>
         <div class="nav-links">
+            <button onclick="showPage('home')">Work</button>
             <button onclick="showPage('software')">Software</button>
+            <a href="#contact">Contact</a>
         </div>
     </nav>
 
@@ -443,7 +443,7 @@
             <div class="contact-right">
                 <div class="team-member reveal">
                     <div class="member-image-container">
-                        <div class="member-image-placeholder">+</div>
+                        <div class="ProfileFridi.jpg">+</div>
                     </div>
                     <div class="member-content">
                         <div class="member-name">Fridtjof<br>Diekmann</div>
@@ -504,10 +504,13 @@
                 </div>
                 <div class="tool-screenshots">
                     <div class="screenshot">
-                        <img src="placeholder-ingrid-1.jpg" alt="INGRID screenshot 1" onerror="this.parentElement.textContent='Screenshot 1'">
+                        <img src="INGRID1.PNG" alt="INGRID screenshot 1" onerror="this.parentElement.textContent='Screenshot 1'">
                     </div>
                     <div class="screenshot">
-                        <img src="placeholder-ingrid-2.jpg" alt="INGRID screenshot 2" onerror="this.parentElement.textContent='Screenshot 2'">
+                        <img src="INGRID2.PNG" alt="INGRID screenshot 2" onerror="this.parentElement.textContent='Screenshot 2'">
+                    </div>
+                     <div class="screenshot">
+                        <img src="INGRID3.PNG" alt="INGRID screenshot 3" onerror="this.parentElement.textContent='Screenshot 3'">
                     </div>
                 </div>
             </div>
@@ -571,7 +574,12 @@
         // Parallax
         window.addEventListener('scroll', () => {
             const bg = document.querySelector('.hero-bg');
-            if (bg) bg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+            if (!bg) return;
+            const heroH = document.getElementById('hero').offsetHeight;
+            const y = window.scrollY;
+            if (y <= heroH) {
+                bg.style.transform = `translateY(${y * 0.3}px)`;
+            }
         }, { passive: true });
 
         // Reveal on scroll
