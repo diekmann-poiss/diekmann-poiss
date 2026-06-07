@@ -40,13 +40,21 @@
             font-size: 1.1rem; font-weight: 400;
             color: #fff; letter-spacing: 0.03em;
             cursor: pointer;
+            background: none; border: none;
         }
         .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links button {
+            font-size: 0.72rem; font-weight: 400; letter-spacing: 0.15em;
+            text-transform: uppercase; color: #fff;
+            background: none; border: none; cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: opacity 0.2s;
+        }
+        .nav-links button:hover { opacity: 0.6; }
         .nav-links a {
             font-size: 0.72rem; font-weight: 400; letter-spacing: 0.15em;
             text-transform: uppercase; color: #fff;
             text-decoration: none; transition: opacity 0.2s;
-            cursor: pointer;
         }
         .nav-links a:hover { opacity: 0.6; }
 
@@ -60,10 +68,11 @@
         .hero-bg {
             position: absolute; inset: 0;
             background: #2a3d30;
-            background-image: url('LoniceraHeck.JPG');
+            background-image: url('LoniceraHen.JPG');
             background-size: cover; background-position: center 40%;
             transform: scale(1.04);
             transition: transform 12s ease-out;
+            will-change: transform;
         }
         .hero-bg.loaded { transform: scale(1); }
         .hero-overlay {
@@ -108,7 +117,7 @@
             animation: scrollpulse 2s ease-in-out infinite;
         }
         @keyframes scrollpulse {
-            0%, 100% { opacity: 0.4; transform: scaleY(1); transform-origin: top; }
+            0%, 100% { opacity: 0.4; }
             50% { opacity: 1; }
         }
 
@@ -153,12 +162,12 @@
         }
 
         /* ── IMAGE BAND ── */
-        #image-band {
+        .image-band {
             height: 55vh; min-height: 360px;
             overflow: hidden; border-top: 1px solid var(--border);
             position: relative;
         }
-        #image-band img {
+        .image-band img {
             width: 100%; height: 100%; object-fit: cover; object-position: center 60%;
             display: block;
             filter: saturate(0.85);
@@ -202,99 +211,59 @@
 
         .contact-right {
             border-left: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
         }
         .team-member {
-            padding: 3rem;
-            border-bottom: 1px solid var(--border);
-            flex: 1;
-            display: flex;
-            align-items: flex-start;
-            gap: 2rem;
+            padding: 3rem; border-bottom: 1px solid var(--border);
+            flex: 1; display: flex; align-items: flex-start; gap: 2rem;
             transition: background 0.3s;
         }
         .team-member:last-child { border-bottom: none; }
         .team-member:hover { background: rgba(107,158,122,0.05); }
 
-        .member-image-container {
-            flex-shrink: 0;
-        }
-
+        .member-image-container { flex-shrink: 0; }
         .member-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--accent);
-            display: block;
+            width: 120px; height: 120px; border-radius: 50%;
+            object-fit: cover; border: 2px solid var(--accent); display: block;
         }
-
         .member-image-placeholder {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
+            width: 120px; height: 120px; border-radius: 50%;
             border: 2px solid var(--accent);
             background: linear-gradient(135deg, #e8f5f0 0%, #d4f1e4 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
-            font-size: 2.5rem;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--accent); font-size: 2.5rem;
         }
-
         .member-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            flex: 1; display: flex; flex-direction: column; justify-content: space-between;
         }
-
         .member-name {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem; font-weight: 400;
-            color: var(--dark);
-            margin-bottom: 1rem;
-            line-height: 1.2;
+            color: var(--dark); margin-bottom: 1rem; line-height: 1.2;
         }
-
         .member-skills {
-            display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
+            display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem;
         }
-
         .skill-badge {
-            font-size: 0.65rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--muted);
-            background: rgba(107,158,122,0.08);
-            padding: 0.5rem 0.9rem;
-            border-radius: 20px;
+            font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--muted); background: rgba(107,158,122,0.08);
+            padding: 0.5rem 0.9rem; border-radius: 20px;
             border: 1px solid rgba(107,158,122,0.2);
         }
-
         .member-linkedin {
             font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-            color: var(--muted); text-decoration: none;
-            transition: color 0.2s;
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            width: fit-content;
+            color: var(--muted); text-decoration: none; transition: color 0.2s;
+            display: inline-flex; align-items: center; gap: 0.5rem; width: fit-content;
         }
         .member-linkedin:hover { color: var(--accent); }
         .member-linkedin::after { content: '↗'; font-size: 0.85em; }
 
         /* ── FOOTER ── */
         footer {
-            padding: 1.25rem 3rem;
-            border-top: 1px solid var(--border);
+            padding: 1.25rem 3rem; border-top: 1px solid var(--border);
             display: flex; justify-content: space-between; align-items: center;
         }
-        footer span {
-            font-size: 0.72rem; letter-spacing: 0.08em; color: var(--muted);
-        }
+        footer span { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--muted); }
 
         /* ── PAGE VISIBILITY ── */
         .page { display: none; }
@@ -302,109 +271,61 @@
 
         /* ── SOFTWARE PAGE ── */
         #software-hero {
-            position: relative;
-            height: 60vh; min-height: 400px;
-            overflow: hidden;
-            display: flex; align-items: center; justify-content: flex-start;
+            position: relative; height: 60vh; min-height: 400px;
+            overflow: hidden; display: flex; align-items: center; justify-content: flex-start;
             background: linear-gradient(135deg, #2a3d30 0%, #1a2822 100%);
         }
         .software-hero-content {
-            position: relative; z-index: 2;
-            padding: 0 3rem;
-            max-width: 800px;
+            position: relative; z-index: 2; padding: 0 3rem; max-width: 800px;
         }
         .software-hero-title {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.5rem, 6vw, 5rem);
             font-weight: 400; line-height: 1.05;
-            color: #fff; letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
+            color: #fff; letter-spacing: -0.02em; margin-bottom: 1.5rem;
         }
         .software-hero-desc {
             font-size: 1rem; line-height: 1.6;
-            color: rgba(255,255,255,0.75);
-            max-width: 600px;
+            color: rgba(255,255,255,0.75); max-width: 600px;
         }
-
-        .software-tools {
-            padding: 5rem 3rem;
-        }
-
+        .software-tools { padding: 5rem 3rem; }
         .tool-section {
-            margin-bottom: 6rem;
-            padding-bottom: 4rem;
+            margin-bottom: 6rem; padding-bottom: 4rem;
             border-bottom: 1px solid var(--border);
         }
-        .tool-section:last-child {
-            border-bottom: none;
-        }
-
-        .tool-header {
-            margin-bottom: 3rem;
-        }
-
+        .tool-section:last-child { border-bottom: none; margin-bottom: 0; }
+        .tool-header { margin-bottom: 3rem; }
         .tool-name {
             font-family: 'Playfair Display', serif;
             font-size: clamp(1.8rem, 4vw, 2.8rem);
-            font-weight: 400;
-            color: var(--dark);
-            margin-bottom: 0.8rem;
-            line-height: 1.1;
+            font-weight: 400; color: var(--dark);
+            margin-bottom: 0.8rem; line-height: 1.1;
         }
-
         .tool-status {
-            display: inline-block;
-            font-size: 0.65rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #fff;
-            background: var(--accent);
-            padding: 0.4rem 0.8rem;
-            border-radius: 3px;
-            margin-bottom: 1rem;
+            display: inline-block; font-size: 0.65rem;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: #fff; background: var(--accent);
+            padding: 0.4rem 0.8rem; border-radius: 3px; margin-bottom: 1rem;
         }
-
         .tool-description {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: var(--muted);
-            max-width: 700px;
-            margin-bottom: 2.5rem;
+            font-size: 0.95rem; line-height: 1.7; color: var(--muted);
+            max-width: 700px; margin-bottom: 2.5rem;
         }
-
         .tool-screenshots {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            align-items: flex-start;
+            display: flex; gap: 2rem; flex-wrap: wrap;
+            justify-content: flex-start; align-items: flex-start;
         }
-
         .screenshot {
-            flex: 0 1 auto;
-            width: 220px;
-            aspect-ratio: 1170 / 2532;
-            border-radius: 12px;
-            overflow: hidden;
+            flex: 0 1 auto; width: 220px;
+            aspect-ratio: 1170 / 2532; border-radius: 12px; overflow: hidden;
             background: linear-gradient(135deg, #e8f5f0 0%, #d4f1e4 100%);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--muted);
-            font-size: 0.85rem;
-            text-align: center;
-            padding: 1rem;
+            border: 1px solid var(--border); display: flex; align-items: center;
+            justify-content: center; color: var(--muted);
+            font-size: 0.85rem; text-align: center; padding: 1rem;
         }
+        .screenshot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        .screenshot img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* ── FADE IN ── */
+        /* ── REVEAL ── */
         .reveal {
             opacity: 0; transform: translateY(28px);
             transition: opacity 0.8s ease, transform 0.8s ease;
@@ -414,6 +335,7 @@
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
 
+        /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
             nav { padding: 1.2rem 1.5rem; }
             .hero-content { padding: 0 1.5rem 2.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
@@ -426,10 +348,9 @@
             .contact-right { border-left: none; border-top: 1px solid var(--border); }
             .contact-left { padding: 3.5rem 1.5rem; }
             .team-member { padding: 2rem 1.5rem; flex-direction: column; align-items: center; text-align: center; gap: 1rem; }
-            footer { padding: 1rem 1.5rem; }
             .member-skills { justify-content: center; }
             .member-linkedin { justify-content: center; }
-            
+            footer { padding: 1rem 1.5rem; }
             .software-hero-content { padding: 0 1.5rem; }
             .software-tools { padding: 3rem 1.5rem; }
             .tool-section { margin-bottom: 4rem; padding-bottom: 3rem; }
@@ -441,24 +362,24 @@
 <body>
 
     <nav>
-        <div class="nav-logo" onclick="showPage('home')">Diekmann & Poiss</div>
+        <button class="nav-logo" onclick="showPage('home')">Diekmann & Poiss</button>
         <div class="nav-links">
-            <a onclick="showPage('home')">Work</a>
-            <a onclick="showPage('software')">Software</a>
+            <button onclick="showPage('home')">Work</button>
+            <button onclick="showPage('software')">Software</button>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
     <!-- HOME PAGE -->
     <div id="home" class="page active">
-        <!-- HERO -->
+
         <section id="hero">
             <div class="hero-bg" id="heroBg"></div>
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1 class="hero-title">Diekmann<br><em>& Poiss</em></h1>
                 <div class="hero-tagline">
-                    Digital Solutions and consulting in <br>Building greenery
+                    Digital Solutions and consulting in<br>Building greenery
                 </div>
             </div>
             <div class="hero-scroll">
@@ -467,20 +388,17 @@
             </div>
         </section>
 
-        <!-- INTRO -->
         <section id="intro">
             <div class="intro-body">
                 <p class="reveal">We provide software solutions and consulting for working with living architecture — indoor and outdoor</p>
             </div>
         </section>
 
-        <!-- IMAGE BAND -->
-        <div id="image-band">
+        <div class="image-band">
             <img src="Schwarzau4.JPG" alt="Green Wall Project" onerror="this.parentElement.style.background='#2a3d30'">
             <div class="band-caption"></div>
         </div>
-        
-        <!-- SERVICES -->
+
         <section id="services">
             <div class="service-tile reveal">
                 <div class="service-num">01</div>
@@ -504,13 +422,11 @@
             </div>
         </section>
 
-        <!-- IMAGE BAND -->
-        <div id="image-band">
+        <div class="image-band">
             <img src="Wisteria4.JPG" alt="Wisteria plant detail" onerror="this.parentElement.style.background='#2a3d30'">
             <div class="band-caption"></div>
         </div>
 
-        <!-- CONTACT -->
         <section id="contact">
             <div class="contact-left reveal">
                 <div>
@@ -550,11 +466,12 @@
                 </div>
             </div>
         </section>
+
     </div>
 
     <!-- SOFTWARE PAGE -->
     <div id="software" class="page">
-        <!-- HERO -->
+
         <section id="software-hero">
             <div class="software-hero-content">
                 <h1 class="software-hero-title">Our Software</h1>
@@ -562,10 +479,8 @@
             </div>
         </section>
 
-        <!-- TOOLS -->
         <div class="software-tools">
-            
-            <!-- GRETA -->
+
             <div class="tool-section reveal">
                 <div class="tool-header">
                     <h2 class="tool-name">GRETA</h2>
@@ -573,11 +488,10 @@
                     <p class="tool-description">Vertical greening system and species selection tool</p>
                 </div>
                 <div class="tool-screenshots">
-                    <p style="font-size: 0.9rem; color: var(--muted); margin-top: 1rem;">Screenshots coming soon</p>
+                    <p style="font-size: 0.9rem; color: var(--muted);">Screenshots coming soon</p>
                 </div>
             </div>
 
-            <!-- INGRID -->
             <div class="tool-section reveal reveal-delay-1">
                 <div class="tool-header">
                     <h2 class="tool-name">INGRID</h2>
@@ -593,7 +507,6 @@
                 </div>
             </div>
 
-            <!-- AquaCalc -->
             <div class="tool-section reveal reveal-delay-2">
                 <div class="tool-header">
                     <h2 class="tool-name">AquaCalc</h2>
@@ -612,7 +525,6 @@
                 </div>
             </div>
 
-            <!-- GreenSight -->
             <div class="tool-section reveal reveal-delay-3">
                 <div class="tool-header">
                     <h2 class="tool-name">GreenSight</h2>
@@ -626,6 +538,7 @@
             </div>
 
         </div>
+
     </div>
 
     <footer>
@@ -635,38 +548,41 @@
 
     <script>
         function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0, 0);
+            observeReveals();
         }
 
+        // Hero background load
         window.addEventListener('load', () => {
             const bg = document.getElementById('heroBg');
-            if (bg) {
-                const img = new Image();
-                img.onload = () => bg.classList.add('loaded');
-                img.src = 'LoniceraHeck.JPG';
-            }
+            if (!bg) return;
+            const img = new Image();
+            img.onload = () => bg.classList.add('loaded');
+            img.src = 'LoniceraHeck.JPG';
         });
 
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('visible');
-                    observer.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.12 });
-        reveals.forEach(el => observer.observe(el));
-
+        // Parallax
         window.addEventListener('scroll', () => {
-            const y = window.scrollY;
             const bg = document.querySelector('.hero-bg');
-            if (bg) bg.style.transform = `scale(1) translateY(${y * 0.3}px)`;
+            if (bg) bg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
         }, { passive: true });
+
+        // Reveal on scroll
+        function observeReveals() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible');
+                        observer.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+            document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+        }
+
+        observeReveals();
     </script>
 </body>
 </html>
