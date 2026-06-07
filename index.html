@@ -72,7 +72,6 @@
             background-size: cover; background-position: center 40%;
             will-change: transform;
         }
-        .hero-bg.loaded { transform: scale(1); }
         .hero-overlay {
             position: absolute; inset: 0;
             background: linear-gradient(
@@ -443,7 +442,7 @@
             <div class="contact-right">
                 <div class="team-member reveal">
                     <div class="member-image-container">
-                        <div class="ProfileFridi.jpg">+</div>
+                        <img src="ProfileFridi.jpg" alt="Fridtjof Diekmann" class="member-image">
                     </div>
                     <div class="member-content">
                         <div class="member-name">Fridtjof<br>Diekmann</div>
@@ -509,7 +508,7 @@
                     <div class="screenshot">
                         <img src="INGRID2.PNG" alt="INGRID screenshot 2" onerror="this.parentElement.textContent='Screenshot 2'">
                     </div>
-                     <div class="screenshot">
+                    <div class="screenshot">
                         <img src="INGRID3.PNG" alt="INGRID screenshot 3" onerror="this.parentElement.textContent='Screenshot 3'">
                     </div>
                 </div>
@@ -562,16 +561,7 @@
             observeReveals();
         }
 
-        // Hero background load
-        window.addEventListener('load', () => {
-            const bg = document.getElementById('heroBg');
-            if (!bg) return;
-            const img = new Image();
-            img.onload = () => bg.classList.add('loaded');
-            img.src = 'LoniceraHeck.JPG';
-        });
-
-        // Parallax
+        // Parallax — only runs while hero is visible, resets cleanly on scroll up
         window.addEventListener('scroll', () => {
             const bg = document.querySelector('.hero-bg');
             if (!bg) return;
