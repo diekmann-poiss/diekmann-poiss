@@ -395,12 +395,15 @@
         }
         .cycle-box:hover {
             background: #fff;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 24px rgba(107, 158, 122, 0.25);
+            border-color: var(--accent);
+            z-index: 3;
         }
         .cycle-box.active {
             background: var(--accent);
             border-color: var(--accent);
-            box-shadow: 0 4px 16px rgba(107,158,122,0.2);
+            box-shadow: 0 8px 24px rgba(107, 158, 122, 0.3);
+            z-index: 4;
         }
         .cycle-box.active .box-number,
         .cycle-box.active .box-title {
@@ -411,6 +414,16 @@
         .box-3 { transform: rotate(144deg) translateY(-220px) rotate(-144deg); }
         .box-4 { transform: rotate(216deg) translateY(-220px) rotate(-216deg); }
         .box-5 { transform: rotate(288deg) translateY(-220px) rotate(-288deg); }
+        .box-1:hover { transform: rotate(0deg) translateY(-220px) rotate(0deg) scale(1.05); }
+        .box-2:hover { transform: rotate(72deg) translateY(-220px) rotate(-72deg) scale(1.05); }
+        .box-3:hover { transform: rotate(144deg) translateY(-220px) rotate(-144deg) scale(1.05); }
+        .box-4:hover { transform: rotate(216deg) translateY(-220px) rotate(-216deg) scale(1.05); }
+        .box-5:hover { transform: rotate(288deg) translateY(-220px) rotate(-288deg) scale(1.05); }
+        .box-1.active { transform: rotate(0deg) translateY(-220px) rotate(0deg) scale(1.02); }
+        .box-2.active { transform: rotate(72deg) translateY(-220px) rotate(-72deg) scale(1.02); }
+        .box-3.active { transform: rotate(144deg) translateY(-220px) rotate(-144deg) scale(1.02); }
+        .box-4.active { transform: rotate(216deg) translateY(-220px) rotate(-216deg) scale(1.02); }
+        .box-5.active { transform: rotate(288deg) translateY(-220px) rotate(-288deg) scale(1.02); }
         .box-content {
             text-align: center;
             padding: 1rem;
