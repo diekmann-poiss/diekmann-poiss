@@ -86,7 +86,6 @@
             padding: 0 3rem 3.5rem;
             width: 100%;
             display: flex; justify-content: space-between; align-items: flex-end;
-            flex-direction: column; gap: 1.5rem;
         }
         .hero-title {
             font-family: 'Playfair Display', serif;
@@ -98,7 +97,7 @@
         .hero-tagline {
             font-size: 0.78rem; font-weight: 400; letter-spacing: 0.18em;
             text-transform: uppercase; color: rgba(255,255,255,0.7);
-            text-align: left; line-height: 1.8;
+            text-align: right; line-height: 1.8;
             padding-bottom: 0.5rem;
         }
         .hero-scroll {
@@ -118,15 +117,6 @@
             0%, 100% { opacity: 0.4; }
             50% { opacity: 1; }
         }
-
-        /* COMPETENCY CHAIN */
-        .competency-chain{display:flex;align-items:center;gap:0;width:100%;margin-top:2rem}
-        .comp-node{flex:1;position:relative;cursor:pointer;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:4px;padding:1.1rem 1rem;text-align:center;transition:background .25s,border-color .25s,transform .2s;text-decoration:none;display:block;}
-        .comp-node:hover{background:rgba(107,158,122,.3);border-color:rgba(107,158,122,.6);transform:translateY(-3px)}
-        .comp-node-num{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.4rem}
-        .comp-node-label{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:400;color:#fff;line-height:1.2}
-        .chain-arrow{flex:0 0 28px;display:flex;align-items:center;justify-content:center}
-        .chain-arrow svg{width:20px;height:20px;opacity:.45}
 
         /* ── INTRO ── */
         #intro {
@@ -352,11 +342,8 @@
         /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
             nav { padding: 1.2rem 1.5rem; }
-            .hero-content { padding: 0 1.5rem 2.5rem; align-items: flex-start; }
+            .hero-content { padding: 0 1.5rem 2.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
             .hero-tagline { text-align: left; }
-            .competency-chain{flex-wrap:wrap;gap:.6rem}
-            .chain-arrow{display:none}
-            .comp-node{flex:0 0 calc(50% - .3rem)}
             #intro { padding: 3rem 1.5rem; }
             #services { grid-template-columns: 1fr; }
             .service-tile { border-right: none; border-bottom: 1px solid var(--border); }
@@ -396,48 +383,6 @@
                 <div class="hero-tagline">
                     Building Greenery<br>Development of digital Solutions and consulting
                 </div>
-                <nav class="competency-chain" aria-label="Competencies">
-                    <a class="comp-node" href="#services" onclick="smoothTo(event,'services')">
-                        <div class="comp-node-num">01</div>
-                        <div class="comp-node-label">Structure &<br>Climbing Aid</div>
-                    </a>
-                    <div class="chain-arrow">
-                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 10h12M12 6l4 4-4 4" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <a class="comp-node" href="#services" onclick="smoothTo(event,'services')">
-                        <div class="comp-node-num">02</div>
-                        <div class="comp-node-label">Soil &<br>Substrate</div>
-                    </a>
-                    <div class="chain-arrow">
-                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 10h12M12 6l4 4-4 4" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <a class="comp-node" href="#services" onclick="smoothTo(event,'services')">
-                        <div class="comp-node-num">03</div>
-                        <div class="comp-node-label">Plants</div>
-                    </a>
-                    <div class="chain-arrow">
-                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 10h12M12 6l4 4-4 4" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <a class="comp-node" href="#services" onclick="smoothTo(event,'services')">
-                        <div class="comp-node-num">04</div>
-                        <div class="comp-node-label">Irrigation<br>Technology</div>
-                    </a>
-                    <div class="chain-arrow">
-                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 10h12M12 6l4 4-4 4" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <a class="comp-node" href="#contact" onclick="smoothTo(event,'contact')">
-                        <div class="comp-node-num">05</div>
-                        <div class="comp-node-label">Maintenance<br>Expertise</div>
-                    </a>
-                </nav>
             </div>
             <div class="hero-scroll">
                 <span>Scroll</span>
@@ -545,7 +490,7 @@
                     <p class="tool-description">Green Reasoning & Evaluation Tool for Architecture - vertical greening system and species selection.</p>
                 </div>
                 <div class="tool-screenshots">
-                    <div class="screenshot">
+                                        <div class="screenshot">
                         <img src="GRETA1.PNG" alt="GRETA screenshot 1" onerror="this.parentElement.textContent='Screenshot 1'">
                     </div>
                     <div class="screenshot">
@@ -621,12 +566,6 @@
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0, 0);
             observeReveals();
-        }
-
-        function smoothTo(e, id){
-            e.preventDefault();
-            const el=document.getElementById(id);
-            if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
         }
 
         // Parallax — only runs while hero is visible, resets cleanly on scroll up
