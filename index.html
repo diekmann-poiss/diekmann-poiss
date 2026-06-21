@@ -130,34 +130,6 @@
             color: var(--dark); max-width: 680px;
         }
 
-        /* ── SERVICES ── */
-        #services {
-            display: grid; grid-template-columns: repeat(2, 1fr);
-            border-top: 1px solid var(--border);
-        }
-        .service-tile {
-            padding: 3rem;
-            border-right: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            transition: background 0.3s ease;
-        }
-        .service-tile:nth-child(even) { border-right: none; }
-        .service-tile:nth-child(3), .service-tile:nth-child(4) { border-bottom: none; }
-        .service-tile:hover { background: rgba(107,158,122,0.06); }
-        .service-num {
-            font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted);
-            text-transform: uppercase; margin-bottom: 2rem;
-        }
-        .service-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.45rem; font-weight: 400; line-height: 1.2;
-            color: var(--dark); margin-bottom: 1rem;
-        }
-        .service-desc {
-            font-size: 0.88rem; line-height: 1.75;
-            color: var(--muted); max-width: 320px;
-        }
-
         /* ── IMAGE BAND ── */
         .image-band {
             height: 55vh; min-height: 360px;
@@ -340,124 +312,95 @@
         .reveal-delay-3 { transition-delay: 0.3s; }
         .reveal-delay-4 { transition-delay: 0.4s; }
 
-        /* ── SERVICES CYCLE ── */
+        /* ── SERVICES ── */
         #services {
-            padding: 5rem 3rem;
+            padding: 5rem 3rem 4rem;
             border-top: 1px solid var(--border);
-            position: relative;
         }
         .services-header {
-            text-align: center;
             margin-bottom: 4rem;
+        }
+        .section-label {
+            font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--muted); margin-bottom: 0.75rem; display: block;
         }
         .section-title {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 400;
             color: var(--dark);
-            margin-bottom: 0.5rem;
+            line-height: 1.05;
         }
-        .section-subtitle {
-            font-size: 0.95rem;
-            color: var(--muted);
-            letter-spacing: 0.05em;
-        }
-        .cycle-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            height: 500px;
-            margin: 0 auto;
-        }
-        .cycle-arrows {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
-        .cycle-box {
-            position: absolute;
-            width: 140px;
-            height: 140px;
-            top: 50%;
-            left: 50%;
-            margin: -70px 0 0 -70px;
-            background: var(--off-white);
-            border: 1px solid var(--border);
-            border-radius: 16px;
+
+        /* ── CHAIN DIAGRAM ── */
+        .chain-diagram {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: stretch;
+            gap: 0;
+            margin: 0 0 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .chain-diagram::-webkit-scrollbar { display: none; }
+
+        .chain-node {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
             cursor: pointer;
-            z-index: 2;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: relative;
+            padding: 2rem 1.75rem 2rem;
+            border: 1px solid var(--border);
+            border-right: none;
+            transition: background 0.25s ease;
+            text-decoration: none;
+            color: inherit;
         }
-        .cycle-box:hover {
-            background: #fff;
-            box-shadow: 0 8px 24px rgba(107, 158, 122, 0.25);
-            border-color: var(--accent);
-            z-index: 3;
+        .chain-node:last-child {
+            border-right: 1px solid var(--border);
         }
-        .cycle-box.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            box-shadow: 0 8px 24px rgba(107, 158, 122, 0.3);
-            z-index: 4;
+        .chain-node:hover {
+            background: rgba(107,158,122,0.06);
         }
-        .cycle-box.active .box-number,
-        .cycle-box.active .box-title {
+        .chain-node.active {
+            background: var(--dark);
+        }
+        .chain-node.active .chain-num,
+        .chain-node.active .chain-title {
             color: #fff;
         }
-        .box-1 { transform: rotate(0deg) translateY(-220px) rotate(0deg); }
-        .box-2 { transform: rotate(72deg) translateY(-220px) rotate(-72deg); }
-        .box-3 { transform: rotate(144deg) translateY(-220px) rotate(-144deg); }
-        .box-4 { transform: rotate(216deg) translateY(-220px) rotate(-216deg); }
-        .box-5 { transform: rotate(288deg) translateY(-220px) rotate(-288deg); }
-        .box-1:hover { transform: rotate(0deg) translateY(-220px) rotate(0deg) scale(1.05); }
-        .box-2:hover { transform: rotate(72deg) translateY(-220px) rotate(-72deg) scale(1.05); }
-        .box-3:hover { transform: rotate(144deg) translateY(-220px) rotate(-144deg) scale(1.05); }
-        .box-4:hover { transform: rotate(216deg) translateY(-220px) rotate(-216deg) scale(1.05); }
-        .box-5:hover { transform: rotate(288deg) translateY(-220px) rotate(-288deg) scale(1.05); }
-        .box-1.active { transform: rotate(0deg) translateY(-220px) rotate(0deg) scale(1.02); }
-        .box-2.active { transform: rotate(72deg) translateY(-220px) rotate(-72deg) scale(1.02); }
-        .box-3.active { transform: rotate(144deg) translateY(-220px) rotate(-144deg) scale(1.02); }
-        .box-4.active { transform: rotate(216deg) translateY(-220px) rotate(-216deg) scale(1.02); }
-        .box-5.active { transform: rotate(288deg) translateY(-220px) rotate(-288deg) scale(1.02); }
-        .box-content {
-            text-align: center;
-            padding: 1rem;
+        .chain-node.active .chain-arrow {
+            color: rgba(255,255,255,0.3);
         }
-        .box-number {
-            display: block;
-            font-size: 0.65rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 0.5rem;
+
+        .chain-num {
+            font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--muted); margin-bottom: 2rem;
+            transition: color 0.25s;
         }
-        .box-title {
-            display: block;
+        .chain-title {
             font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
-            font-weight: 400;
-            color: var(--dark);
-            line-height: 1.3;
+            font-size: 1.05rem; font-weight: 400;
+            color: var(--dark); line-height: 1.25;
+            flex: 1;
+            transition: color 0.25s;
         }
-        .cycle-center-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 3;
-            cursor: default;
+        .chain-arrow {
+            margin-top: 2rem;
+            font-size: 1rem;
+            color: rgba(107,158,122,0.5);
+            transition: color 0.25s, transform 0.25s;
+            display: block;
+            line-height: 1;
         }
-        .cycle-center-icon svg {
-            opacity: 0.6;
-            transition: opacity 0.3s;
+        .chain-node:hover .chain-arrow {
+            transform: translateX(3px);
+            color: var(--accent);
         }
-        .cycle-container:hover .cycle-center-icon svg {
-            opacity: 0.8;
+        .chain-node.active .chain-arrow {
+            transform: translateX(3px);
         }
 
         /* ── SERVICE DETAIL SECTIONS ── */
@@ -522,44 +465,19 @@
             transform: scale(1.05);
         }
 
-        /* Responsive for service details */
-        @media (max-width: 768px) {
-            .service-detail {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                padding: 3rem 1.5rem;
-            }
-            .detail-content {
-                padding-right: 0;
-                margin-bottom: 2rem;
-            }
-            .detail-image {
-                aspect-ratio: 16 / 9;
-            }
-            .cycle-container {
-                height: 400px;
-            }
-            .cycle-box {
-                width: 110px;
-                height: 110px;
-                margin: -55px 0 0 -55px;
-            }
-            .box-1 { transform: rotate(0deg) translateY(-170px) rotate(0deg); }
-            .box-2 { transform: rotate(72deg) translateY(-170px) rotate(-72deg); }
-            .box-3 { transform: rotate(144deg) translateY(-170px) rotate(-144deg); }
-            .box-4 { transform: rotate(216deg) translateY(-170px) rotate(-216deg); }
-            .box-5 { transform: rotate(288deg) translateY(-170px) rotate(-288deg); }
-        }
-
         /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
             nav { padding: 1.2rem 1.5rem; }
             .hero-content { padding: 0 1.5rem 2.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
             .hero-tagline { text-align: left; }
             #intro { padding: 3rem 1.5rem; }
-            #services { grid-template-columns: 1fr; }
-            .service-tile { border-right: none; border-bottom: 1px solid var(--border); }
-            .service-tile:last-child { border-bottom: none; }
+            #services { padding: 3.5rem 1.5rem 3rem; }
+            .chain-diagram { gap: 0; }
+            .chain-node {
+                min-width: 140px;
+                padding: 1.5rem 1.25rem;
+            }
+            .chain-title { font-size: 0.9rem; }
             #contact { grid-template-columns: 1fr; }
             .contact-right { border-left: none; border-top: 1px solid var(--border); }
             .contact-left { padding: 3.5rem 1.5rem; }
@@ -567,6 +485,13 @@
             .member-skills { justify-content: center; }
             .member-linkedin { justify-content: center; }
             footer { padding: 1rem 1.5rem; }
+            .service-detail {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 3rem 1.5rem;
+            }
+            .detail-content { padding-right: 0; margin-bottom: 2rem; }
+            .detail-image { aspect-ratio: 16 / 9; }
             .software-hero-content { padding: 0 1.5rem; }
             .software-tools { padding: 3rem 1.5rem; }
             .tool-section { margin-bottom: 4rem; padding-bottom: 3rem; }
@@ -615,57 +540,35 @@
 
         <section id="services">
             <div class="services-header reveal">
+                <span class="section-label">What we do</span>
                 <h2 class="section-title">Our Services</h2>
-                <p class="section-subtitle">A complete cycle of expertise for building greenery</p>
             </div>
-            <div class="cycle-container reveal">
-                <svg class="cycle-arrows" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrowhead" markerWidth="14" markerHeight="9" refX="12" refY="4.5" orient="auto">
-                            <polygon points="0 0, 12 4.5, 0 9" fill="var(--accent)"/>
-                        </marker>
-                    </defs>
-                    <path d="M250,30 Q400,100 459,182" stroke="var(--accent)" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
-                    <path d="M459,182 Q420,300 379,428" stroke="var(--accent)" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
-                    <path d="M379,428 Q250,450 121,428" stroke="var(--accent)" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
-                    <path d="M121,428 Q80,300 41,182" stroke="var(--accent)" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
-                    <path d="M41,182 Q150,100 250,30" stroke="var(--accent)" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
-                </svg>
-                <div class="cycle-box box-1" onclick="scrollToSection('service-structure')">
-                    <div class="box-content">
-                        <span class="box-number">01</span>
-                        <span class="box-title">Structure</span>
-                    </div>
+
+            <div class="chain-diagram reveal reveal-delay-1">
+                <div class="chain-node" id="node-1" onclick="scrollToSection('service-structure')">
+                    <span class="chain-num">01</span>
+                    <span class="chain-title">Structure &amp; Climbing Aid</span>
+                    <span class="chain-arrow">→</span>
                 </div>
-                <div class="cycle-box box-2" onclick="scrollToSection('service-soil')">
-                    <div class="box-content">
-                        <span class="box-number">02</span>
-                        <span class="box-title">Soil & Substrate</span>
-                    </div>
+                <div class="chain-node" id="node-2" onclick="scrollToSection('service-soil')">
+                    <span class="chain-num">02</span>
+                    <span class="chain-title">Soil &amp; Substrate</span>
+                    <span class="chain-arrow">→</span>
                 </div>
-                <div class="cycle-box box-3" onclick="scrollToSection('service-plants')">
-                    <div class="box-content">
-                        <span class="box-number">03</span>
-                        <span class="box-title">Plants</span>
-                    </div>
+                <div class="chain-node" id="node-3" onclick="scrollToSection('service-plants')">
+                    <span class="chain-num">03</span>
+                    <span class="chain-title">Plants</span>
+                    <span class="chain-arrow">→</span>
                 </div>
-                <div class="cycle-box box-4" onclick="scrollToSection('service-irrigation')">
-                    <div class="box-content">
-                        <span class="box-number">04</span>
-                        <span class="box-title">Irrigation Technology</span>
-                    </div>
+                <div class="chain-node" id="node-4" onclick="scrollToSection('service-irrigation')">
+                    <span class="chain-num">04</span>
+                    <span class="chain-title">Irrigation Technology</span>
+                    <span class="chain-arrow">→</span>
                 </div>
-                <div class="cycle-box box-5" onclick="scrollToSection('service-maintenance')">
-                    <div class="box-content">
-                        <span class="box-number">05</span>
-                        <span class="box-title">Maintenance Expertise</span>
-                    </div>
-                </div>
-                <div class="cycle-center-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="10" stroke="var(--accent)" stroke-width="1.5"/>
-                        <path d="M12 8V12L16 16" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                <div class="chain-node" id="node-5" onclick="scrollToSection('service-maintenance')">
+                    <span class="chain-num">05</span>
+                    <span class="chain-title">Maintenance Expertise</span>
+                    <span class="chain-arrow">→</span>
                 </div>
             </div>
         </section>
@@ -816,7 +719,7 @@
                     <p class="tool-description">Green Reasoning & Evaluation Tool for Architecture - vertical greening system and species selection.</p>
                 </div>
                 <div class="tool-screenshots">
-                                        <div class="screenshot">
+                    <div class="screenshot">
                         <img src="GRETA1.PNG" alt="GRETA screenshot 1" onerror="this.parentElement.textContent='Screenshot 1'">
                     </div>
                     <div class="screenshot">
@@ -894,7 +797,7 @@
             observeReveals();
         }
 
-        // Parallax — only runs while hero is visible, resets cleanly on scroll up
+        // Parallax
         window.addEventListener('scroll', () => {
             const bg = document.querySelector('.hero-bg');
             if (!bg) return;
@@ -926,14 +829,13 @@
                     top: section.offsetTop - 80,
                     behavior: 'smooth'
                 });
-                // Re-observe reveals in case they scrolled past some
                 setTimeout(observeReveals, 500);
             }
         }
 
-        // Highlight active service box when scrolling near its section
+        // Highlight active chain node when scrolling near its section
         window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY + 100;
+            const scrollPosition = window.scrollY + 200;
             const sections = [
                 'service-structure',
                 'service-soil',
@@ -941,21 +843,23 @@
                 'service-irrigation',
                 'service-maintenance'
             ];
-            
+
+            let activeIndex = -1;
             sections.forEach((id, index) => {
                 const section = document.getElementById(id);
                 if (section) {
-                    const box = document.querySelector(`.box-${index + 1}`);
-                    if (box) {
-                        const sectionTop = section.offsetTop;
-                        const sectionBottom = sectionTop + section.offsetHeight;
-                        
-                        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                            box.classList.add('active');
-                        } else {
-                            box.classList.remove('active');
-                        }
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        activeIndex = index;
                     }
+                }
+            });
+
+            sections.forEach((id, index) => {
+                const node = document.getElementById(`node-${index + 1}`);
+                if (node) {
+                    node.classList.toggle('active', index === activeIndex);
                 }
             });
         });
