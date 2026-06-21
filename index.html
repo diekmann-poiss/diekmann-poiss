@@ -147,6 +147,124 @@
             color: rgba(255,255,255,0.5);
         }
 
+        /* ── SERVICES ── */
+        #services {
+            padding: 5rem 3rem 4rem;
+            border-top: 1px solid var(--border);
+        }
+        .services-header {
+            margin-bottom: 4rem;
+        }
+        .section-label {
+            font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--muted); margin-bottom: 0.75rem; display: block;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: var(--dark);
+            line-height: 1.05;
+        }
+
+        /* ── CHAIN DIAGRAM ── */
+        .chain-diagram {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .chain-diagram::-webkit-scrollbar { display: none; }
+
+        .chain-node {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            position: relative;
+            padding: 2rem 1.75rem 2rem;
+            border: 1px solid var(--border);
+            border-right: none;
+            transition: background 0.25s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .chain-node:last-child {
+            border-right: 1px solid var(--border);
+        }
+        .chain-node:hover { background: rgba(107,158,122,0.06); }
+        .chain-node.active { background: var(--dark); }
+        .chain-node.active .chain-num,
+        .chain-node.active .chain-title { color: #fff; }
+        .chain-node.active .chain-arrow { color: rgba(255,255,255,0.3); }
+
+        .chain-num {
+            font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--muted); margin-bottom: 2rem;
+            transition: color 0.25s;
+        }
+        .chain-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem; font-weight: 400;
+            color: var(--dark); line-height: 1.25;
+            flex: 1;
+            transition: color 0.25s;
+        }
+        .chain-arrow {
+            margin-top: 2rem;
+            font-size: 1rem;
+            color: rgba(107,158,122,0.5);
+            transition: color 0.25s, transform 0.25s;
+            display: block;
+            line-height: 1;
+        }
+        .chain-node:hover .chain-arrow {
+            transform: translateX(3px);
+            color: var(--accent);
+        }
+        .chain-node.active .chain-arrow { transform: translateX(3px); }
+
+        /* ── SERVICE DETAIL SECTIONS ── */
+        .service-detail {
+            padding: 4rem 3rem;
+            border-top: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .detail-header { grid-column: 1 / -1; margin-bottom: 2rem; }
+        .detail-number {
+            display: inline-block;
+            font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--muted); margin-right: 1rem;
+        }
+        .detail-title {
+            display: inline;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 400; color: var(--dark);
+        }
+        .detail-tagline {
+            display: block; margin-top: 0.5rem;
+            font-size: 0.85rem; color: var(--muted); letter-spacing: 0.05em;
+        }
+        .detail-body { display: contents; }
+        .detail-content { padding-right: 2rem; }
+        .detail-text { font-size: 0.95rem; line-height: 1.75; color: var(--muted); }
+        .detail-image {
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid var(--border); aspect-ratio: 16 / 10;
+        }
+        .detail-image img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .detail-image:hover img { transform: scale(1.05); }
+
         /* ── CONTACT ── */
         #contact {
             display: grid; grid-template-columns: 1fr 1fr;
@@ -177,7 +295,6 @@
             transition: color 0.2s, border-color 0.2s;
         }
         .contact-email:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
-
         .contact-right {
             border-left: 1px solid var(--border);
             display: flex; flex-direction: column;
@@ -189,18 +306,10 @@
         }
         .team-member:last-child { border-bottom: none; }
         .team-member:hover { background: rgba(107,158,122,0.05); }
-
         .member-image-container { flex-shrink: 0; }
         .member-image {
             width: 120px; height: 120px; border-radius: 50%;
             object-fit: cover; border: 2px solid var(--accent); display: block;
-        }
-        .member-image-placeholder {
-            width: 120px; height: 120px; border-radius: 50%;
-            border: 2px solid var(--accent);
-            background: linear-gradient(135deg, #e8f5f0 0%, #d4f1e4 100%);
-            display: flex; align-items: center; justify-content: center;
-            color: var(--accent); font-size: 2.5rem;
         }
         .member-content {
             flex: 1; display: flex; flex-direction: column; justify-content: space-between;
@@ -210,9 +319,7 @@
             font-size: 1.4rem; font-weight: 400;
             color: var(--dark); margin-bottom: 1rem; line-height: 1.2;
         }
-        .member-skills {
-            display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem;
-        }
+        .member-skills { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
         .skill-badge {
             font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
             color: var(--muted); background: rgba(107,158,122,0.08);
@@ -237,6 +344,100 @@
         /* ── PAGE VISIBILITY ── */
         .page { display: none; }
         .page.active { display: block; }
+
+        /* ── WHY US PAGE ── */
+        #whyus-hero {
+            position: relative; height: 60vh; min-height: 400px;
+            overflow: hidden; display: flex; align-items: flex-end;
+        }
+        .whyus-hero-bg {
+            position: absolute; inset: 0;
+            background: #2a3d30;
+            background-image: url('TeamPhoto.jpg');
+            background-size: cover; background-position: center 30%;
+        }
+        .whyus-hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(10,16,12,0.1) 0%,
+                rgba(10,16,12,0.0) 30%,
+                rgba(10,16,12,0.65) 100%
+            );
+        }
+        .whyus-hero-content {
+            position: relative; z-index: 2;
+            padding: 0 3rem 3.5rem; width: 100%;
+        }
+        .whyus-hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 400; line-height: 0.95;
+            color: #fff; letter-spacing: -0.02em;
+        }
+        .whyus-hero-title em { font-style: italic; }
+
+        /* ── WHY US BODY ── */
+        .whyus-body { padding: 5rem 3rem; max-width: 860px; }
+
+        .whyus-lead {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            font-weight: 400; line-height: 1.45;
+            color: var(--dark); margin-bottom: 3rem;
+        }
+
+        .whyus-text {
+            font-size: 0.95rem; line-height: 1.85;
+            color: var(--muted); margin-bottom: 1.5rem;
+        }
+
+        /* ── RESEARCH SECTION ── */
+        .research-block {
+            margin-top: 4rem;
+            padding-top: 4rem;
+            border-top: 1px solid var(--border);
+        }
+        .research-label {
+            font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--muted); margin-bottom: 0.75rem; display: block;
+        }
+        .research-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 400; color: var(--dark);
+            margin-bottom: 1.5rem; line-height: 1.1;
+        }
+        .research-intro {
+            font-size: 0.95rem; line-height: 1.85;
+            color: var(--muted); margin-bottom: 2.5rem; max-width: 680px;
+        }
+        .paper-list {
+            display: flex; flex-direction: column; gap: 0;
+        }
+        .paper-item {
+            padding: 1.75rem 0;
+            border-top: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0 2rem;
+            align-items: start;
+        }
+        .paper-item:last-child { border-bottom: 1px solid var(--border); }
+        .paper-year {
+            font-size: 0.68rem; letter-spacing: 0.12em;
+            color: var(--muted); padding-top: 0.25rem;
+            white-space: nowrap;
+        }
+        .paper-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem; font-weight: 400;
+            font-style: italic; color: var(--dark);
+            line-height: 1.4; margin-bottom: 0.35rem;
+        }
+        .paper-venue {
+            font-size: 0.8rem; color: var(--muted); letter-spacing: 0.03em;
+        }
 
         /* ── SOFTWARE PAGE ── */
         #software-hero {
@@ -285,20 +486,14 @@
             justify-content: flex-start; align-items: flex-start;
         }
         .screenshot {
-            flex: 0 0 auto;
-            width: 220px;
+            flex: 0 0 auto; width: 220px;
             border-radius: 12px; overflow: hidden;
             background: linear-gradient(135deg, #e8f5f0 0%, #d4f1e4 100%);
             border: 1px solid var(--border); display: flex; align-items: center;
             justify-content: center; color: var(--muted);
             font-size: 0.85rem; text-align: center; padding: 1rem;
         }
-        .screenshot img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: contain;
-        }
+        .screenshot img { width: 100%; height: auto; display: block; object-fit: contain; }
         .screenshot:has(img[src]) { padding: 0; }
 
         /* ── REVEAL ── */
@@ -312,159 +507,6 @@
         .reveal-delay-3 { transition-delay: 0.3s; }
         .reveal-delay-4 { transition-delay: 0.4s; }
 
-        /* ── SERVICES ── */
-        #services {
-            padding: 5rem 3rem 4rem;
-            border-top: 1px solid var(--border);
-        }
-        .services-header {
-            margin-bottom: 4rem;
-        }
-        .section-label {
-            font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
-            color: var(--muted); margin-bottom: 0.75rem; display: block;
-        }
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 400;
-            color: var(--dark);
-            line-height: 1.05;
-        }
-
-        /* ── CHAIN DIAGRAM ── */
-        .chain-diagram {
-            display: flex;
-            align-items: stretch;
-            gap: 0;
-            margin: 0 0 0;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-        .chain-diagram::-webkit-scrollbar { display: none; }
-
-        .chain-node {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-            position: relative;
-            padding: 2rem 1.75rem 2rem;
-            border: 1px solid var(--border);
-            border-right: none;
-            transition: background 0.25s ease;
-            text-decoration: none;
-            color: inherit;
-        }
-        .chain-node:last-child {
-            border-right: 1px solid var(--border);
-        }
-        .chain-node:hover {
-            background: rgba(107,158,122,0.06);
-        }
-        .chain-node.active {
-            background: var(--dark);
-        }
-        .chain-node.active .chain-num,
-        .chain-node.active .chain-title {
-            color: #fff;
-        }
-        .chain-node.active .chain-arrow {
-            color: rgba(255,255,255,0.3);
-        }
-
-        .chain-num {
-            font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
-            color: var(--muted); margin-bottom: 2rem;
-            transition: color 0.25s;
-        }
-        .chain-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.05rem; font-weight: 400;
-            color: var(--dark); line-height: 1.25;
-            flex: 1;
-            transition: color 0.25s;
-        }
-        .chain-arrow {
-            margin-top: 2rem;
-            font-size: 1rem;
-            color: rgba(107,158,122,0.5);
-            transition: color 0.25s, transform 0.25s;
-            display: block;
-            line-height: 1;
-        }
-        .chain-node:hover .chain-arrow {
-            transform: translateX(3px);
-            color: var(--accent);
-        }
-        .chain-node.active .chain-arrow {
-            transform: translateX(3px);
-        }
-
-        /* ── SERVICE DETAIL SECTIONS ── */
-        .service-detail {
-            padding: 4rem 3rem;
-            border-top: 1px solid var(--border);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        .detail-header {
-            grid-column: 1 / -1;
-            margin-bottom: 2rem;
-        }
-        .detail-number {
-            display: inline-block;
-            font-size: 0.65rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-right: 1rem;
-        }
-        .detail-title {
-            display: inline;
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            font-weight: 400;
-            color: var(--dark);
-        }
-        .detail-tagline {
-            display: block;
-            margin-top: 0.5rem;
-            font-size: 0.85rem;
-            color: var(--muted);
-            letter-spacing: 0.05em;
-        }
-        .detail-body {
-            display: contents;
-        }
-        .detail-content {
-            padding-right: 2rem;
-        }
-        .detail-text {
-            font-size: 0.95rem;
-            line-height: 1.75;
-            color: var(--muted);
-        }
-        .detail-image {
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            aspect-ratio: 16 / 10;
-        }
-        .detail-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        .detail-image:hover img {
-            transform: scale(1.05);
-        }
-
         /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
             nav { padding: 1.2rem 1.5rem; }
@@ -472,11 +514,7 @@
             .hero-tagline { text-align: left; }
             #intro { padding: 3rem 1.5rem; }
             #services { padding: 3.5rem 1.5rem 3rem; }
-            .chain-diagram { gap: 0; }
-            .chain-node {
-                min-width: 140px;
-                padding: 1.5rem 1.25rem;
-            }
+            .chain-node { min-width: 140px; padding: 1.5rem 1.25rem; }
             .chain-title { font-size: 0.9rem; }
             #contact { grid-template-columns: 1fr; }
             .contact-right { border-left: none; border-top: 1px solid var(--border); }
@@ -485,13 +523,12 @@
             .member-skills { justify-content: center; }
             .member-linkedin { justify-content: center; }
             footer { padding: 1rem 1.5rem; }
-            .service-detail {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                padding: 3rem 1.5rem;
-            }
+            .service-detail { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
             .detail-content { padding-right: 0; margin-bottom: 2rem; }
             .detail-image { aspect-ratio: 16 / 9; }
+            .whyus-hero-content { padding: 0 1.5rem 2.5rem; }
+            .whyus-body { padding: 3rem 1.5rem; }
+            .paper-item { grid-template-columns: 1fr; gap: 0.5rem; }
             .software-hero-content { padding: 0 1.5rem; }
             .software-tools { padding: 3rem 1.5rem; }
             .tool-section { margin-bottom: 4rem; padding-bottom: 3rem; }
@@ -505,6 +542,7 @@
     <nav>
         <button class="nav-logo" onclick="showPage('home')">Diekmann & Poiss</button>
         <div class="nav-links">
+            <button onclick="showPage('whyus')">Why Us</button>
             <button onclick="showPage('software')">Software</button>
         </div>
     </nav>
@@ -700,6 +738,61 @@
 
     </div>
 
+    <!-- WHY US PAGE -->
+    <div id="whyus" class="page">
+
+        <section id="whyus-hero">
+            <div class="whyus-hero-bg"></div>
+            <div class="whyus-hero-overlay"></div>
+            <div class="whyus-hero-content">
+                <h1 class="whyus-hero-title">Why<br><em>us?</em></h1>
+            </div>
+        </section>
+
+        <div class="whyus-body">
+
+            <p class="whyus-lead reveal">We combine hands-on implementation experience with scientific rigour — two disciplines that rarely sit together in the same room.</p>
+
+            <p class="whyus-text reveal reveal-delay-1">Diekmann & Poiss grew out of years spent at the intersection of landscape architecture, building physics, and data science. We have planned, built, and monitored living wall and green roof systems across a range of building typologies — and used those projects as laboratories for the tools we now offer to clients.</p>
+
+            <p class="whyus-text reveal reveal-delay-2">Our approach is rooted in measurable outcomes: thermal comfort, plant survival rates, water efficiency, long-term maintenance cost. Every recommendation we make is one we can back with data — because in most cases we have collected that data ourselves.</p>
+
+            <p class="whyus-text reveal reveal-delay-3">We are a small practice by design. Every project is handled directly by us, not delegated. That means consistent quality, fast turnaround, and a single point of contact from first consultation to final handover.</p>
+
+            <div class="research-block reveal">
+                <span class="research-label">Scientific work</span>
+                <h2 class="research-heading">Grounded in research</h2>
+                <p class="research-intro">Our consulting is informed by peer-reviewed research in urban greening, thermal comfort, and nature-based solutions. Selected publications:</p>
+
+                <div class="paper-list">
+                    <div class="paper-item">
+                        <span class="paper-year">2024</span>
+                        <div>
+                            <div class="paper-title">Evapotranspiration-based water demand modelling for vertical greening systems in Central European climates</div>
+                            <div class="paper-venue">Placeholder journal — replace with actual venue</div>
+                        </div>
+                    </div>
+                    <div class="paper-item">
+                        <span class="paper-year">2023</span>
+                        <div>
+                            <div class="paper-title">Surface temperature reduction through facade greening: a field measurement study in an urban canyon context</div>
+                            <div class="paper-venue">Placeholder journal — replace with actual venue</div>
+                        </div>
+                    </div>
+                    <div class="paper-item">
+                        <span class="paper-year">2022</span>
+                        <div>
+                            <div class="paper-title">Species selection criteria for low-maintenance extensive green roofs: linking substrate depth to long-term plant coverage</div>
+                            <div class="paper-venue">Placeholder journal — replace with actual venue</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
     <!-- SOFTWARE PAGE -->
     <div id="software" class="page">
 
@@ -714,46 +807,8 @@
 
             <div class="tool-section reveal">
                 <div class="tool-header">
-                    <h2 class="tool-name">GRETA</h2>
-                    <span class="tool-status">In Development</span>
-                    <p class="tool-description">Green Reasoning & Evaluation Tool for Architecture - vertical greening system and species selection.</p>
-                </div>
-                <div class="tool-screenshots">
-                    <div class="screenshot">
-                        <img src="GRETA1.PNG" alt="GRETA screenshot 1" onerror="this.parentElement.textContent='Screenshot 1'">
-                    </div>
-                    <div class="screenshot">
-                        <img src="GRETA2.PNG" alt="GRETA screenshot 2" onerror="this.parentElement.textContent='Screenshot 2'">
-                    </div>
-                    <div class="screenshot">
-                        <img src="GRETA3.PNG" alt="GRETA screenshot 3" onerror="this.parentElement.textContent='Screenshot 3'">
-                    </div>
-                </div>
-            </div>
-
-            <div class="tool-section reveal reveal-delay-1">
-                <div class="tool-header">
-                    <h2 class="tool-name">INGRID</h2>
-                    <span class="tool-status">In Development</span>
-                    <p class="tool-description">INdoor GReening IDentification - on-site light and condition assessment for indoor greening species selection.</p>
-                </div>
-                <div class="tool-screenshots">
-                    <div class="screenshot">
-                        <img src="INGRID1.PNG" alt="INGRID screenshot 1" onerror="this.parentElement.textContent='Screenshot 1'">
-                    </div>
-                    <div class="screenshot">
-                        <img src="INGRID2.PNG" alt="INGRID screenshot 2" onerror="this.parentElement.textContent='Screenshot 2'">
-                    </div>
-                    <div class="screenshot">
-                        <img src="INGRID3.PNG" alt="INGRID screenshot 3" onerror="this.parentElement.textContent='Screenshot 3'">
-                    </div>
-                </div>
-            </div>
-
-            <div class="tool-section reveal reveal-delay-2">
-                <div class="tool-header">
                     <h2 class="tool-name">AquaCalc</h2>
-                    <p class="tool-description">FAO-56 species and site-specific water demand calculator. Feel free to explore: https://aquacalc.whacka.app/</p>
+                    <p class="tool-description">FAO-56 species and site-specific water demand calculator. Feel free to explore: <a href="https://aquacalc.whacka.app/" target="_blank">https://aquacalc.whacka.app/</a></p>
                 </div>
                 <div class="tool-screenshots">
                     <div class="screenshot">
@@ -768,7 +823,7 @@
                 </div>
             </div>
 
-            <div class="tool-section reveal reveal-delay-3">
+            <div class="tool-section reveal reveal-delay-1">
                 <div class="tool-header">
                     <h2 class="tool-name">GreenSight</h2>
                     <p class="tool-description">On-site plant coverage measurement.</p>
@@ -797,18 +852,14 @@
             observeReveals();
         }
 
-        // Parallax
         window.addEventListener('scroll', () => {
             const bg = document.querySelector('.hero-bg');
             if (!bg) return;
             const heroH = document.getElementById('hero').offsetHeight;
             const y = window.scrollY;
-            if (y <= heroH) {
-                bg.style.transform = `translateY(${y * 0.3}px)`;
-            }
+            if (y <= heroH) bg.style.transform = `translateY(${y * 0.3}px)`;
         }, { passive: true });
 
-        // Reveal on scroll
         function observeReveals() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(e => {
@@ -821,46 +872,28 @@
             document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
         }
 
-        // Scroll to service detail sections
         function scrollToSection(sectionId) {
             const section = document.getElementById(sectionId);
             if (section) {
-                window.scrollTo({
-                    top: section.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+                window.scrollTo({ top: section.offsetTop - 80, behavior: 'smooth' });
                 setTimeout(observeReveals, 500);
             }
         }
 
-        // Highlight active chain node when scrolling near its section
         window.addEventListener('scroll', () => {
             const scrollPosition = window.scrollY + 200;
-            const sections = [
-                'service-structure',
-                'service-soil',
-                'service-plants',
-                'service-irrigation',
-                'service-maintenance'
-            ];
-
+            const sections = ['service-structure','service-soil','service-plants','service-irrigation','service-maintenance'];
             let activeIndex = -1;
             sections.forEach((id, index) => {
                 const section = document.getElementById(id);
                 if (section) {
-                    const sectionTop = section.offsetTop;
-                    const sectionBottom = sectionTop + section.offsetHeight;
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                        activeIndex = index;
-                    }
+                    const top = section.offsetTop;
+                    if (scrollPosition >= top && scrollPosition < top + section.offsetHeight) activeIndex = index;
                 }
             });
-
             sections.forEach((id, index) => {
                 const node = document.getElementById(`node-${index + 1}`);
-                if (node) {
-                    node.classList.toggle('active', index === activeIndex);
-                }
+                if (node) node.classList.toggle('active', index === activeIndex);
             });
         });
 
