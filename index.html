@@ -39,53 +39,35 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.1rem; font-weight: 400;
             color: #fff; letter-spacing: 0.03em;
-            cursor: pointer;
-            background: none; border: none;
+            cursor: pointer; background: none; border: none;
         }
         .nav-links { display: flex; gap: 2.5rem; }
         .nav-links button {
             font-size: 0.72rem; font-weight: 400; letter-spacing: 0.15em;
             text-transform: uppercase; color: #fff;
             background: none; border: none; cursor: pointer;
-            font-family: 'DM Sans', sans-serif;
-            transition: opacity 0.2s;
+            font-family: 'DM Sans', sans-serif; transition: opacity 0.2s;
         }
         .nav-links button:hover { opacity: 0.6; }
-        .nav-links a {
-            font-size: 0.72rem; font-weight: 400; letter-spacing: 0.15em;
-            text-transform: uppercase; color: #fff;
-            text-decoration: none; transition: opacity 0.2s;
-        }
-        .nav-links a:hover { opacity: 0.6; }
 
         /* ── HERO ── */
         #hero {
-            position: relative;
-            height: 100vh; min-height: 600px;
-            overflow: hidden;
-            display: flex; align-items: flex-end;
+            position: relative; height: 100vh; min-height: 600px;
+            overflow: hidden; display: flex; align-items: flex-end;
         }
         .hero-bg {
-            position: absolute; inset: 0;
-            background: #2a3d30;
+            position: absolute; inset: 0; background: #2a3d30;
             background-image: url('LoniceraHeck.JPG');
             background-size: cover; background-position: center 40%;
             will-change: transform;
         }
         .hero-overlay {
             position: absolute; inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(10,16,12,0.15) 0%,
-                rgba(10,16,12,0.0) 40%,
-                rgba(10,16,12,0.55) 100%
-            );
+            background: linear-gradient(to bottom, rgba(10,16,12,0.15) 0%, rgba(10,16,12,0.0) 40%, rgba(10,16,12,0.55) 100%);
         }
         .hero-content {
-            position: relative; z-index: 2;
-            padding: 0 3rem 3.5rem;
-            width: 100%;
-            display: flex; justify-content: space-between; align-items: flex-end;
+            position: relative; z-index: 2; padding: 0 3rem 3.5rem;
+            width: 100%; display: flex; justify-content: space-between; align-items: flex-end;
         }
         .hero-title {
             font-family: 'Playfair Display', serif;
@@ -97,8 +79,7 @@
         .hero-tagline {
             font-size: 0.78rem; font-weight: 400; letter-spacing: 0.18em;
             text-transform: uppercase; color: rgba(255,255,255,0.7);
-            text-align: right; line-height: 1.8;
-            padding-bottom: 0.5rem;
+            text-align: right; line-height: 1.8; padding-bottom: 0.5rem;
         }
         .hero-scroll {
             position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
@@ -113,33 +94,24 @@
             background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
             animation: scrollpulse 2s ease-in-out infinite;
         }
-        @keyframes scrollpulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
+        @keyframes scrollpulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
         /* ── INTRO ── */
-        #intro {
-            padding: 4rem 3rem;
-            border-top: 1px solid var(--border);
-        }
+        #intro { padding: 4rem 3rem; border-top: 1px solid var(--border); }
         .intro-body p {
             font-family: 'Playfair Display', serif;
             font-size: clamp(1.5rem, 3vw, 2.2rem);
-            font-weight: 400; line-height: 1.45;
-            color: var(--dark); max-width: 680px;
+            font-weight: 400; line-height: 1.45; color: var(--dark); max-width: 680px;
         }
 
         /* ── IMAGE BAND ── */
         .image-band {
             height: 55vh; min-height: 360px;
-            overflow: hidden; border-top: 1px solid var(--border);
-            position: relative;
+            overflow: hidden; border-top: 1px solid var(--border); position: relative;
         }
         .image-band img {
             width: 100%; height: 100%; object-fit: cover; object-position: center 60%;
-            display: block;
-            filter: saturate(0.85);
+            display: block; filter: saturate(0.85);
         }
         .band-caption {
             position: absolute; bottom: 1.5rem; right: 2rem;
@@ -148,105 +120,64 @@
         }
 
         /* ── SERVICES ── */
-        #services {
-            padding: 5rem 3rem 4rem;
-            border-top: 1px solid var(--border);
-        }
-        .services-header {
-            margin-bottom: 4rem;
-        }
+        #services { padding: 5rem 3rem 4rem; border-top: 1px solid var(--border); }
+        .services-header { margin-bottom: 4rem; }
         .section-label {
             font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
             color: var(--muted); margin-bottom: 0.75rem; display: block;
         }
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 400;
-            color: var(--dark);
-            line-height: 1.05;
+            font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; color: var(--dark); line-height: 1.05;
         }
 
         /* ── CHAIN DIAGRAM ── */
         .chain-diagram {
-            display: flex;
-            align-items: stretch;
-            gap: 0;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+            display: flex; align-items: stretch; gap: 0;
+            overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
         }
         .chain-diagram::-webkit-scrollbar { display: none; }
-
         .chain-node {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-            position: relative;
-            padding: 2rem 1.75rem 2rem;
-            border: 1px solid var(--border);
-            border-right: none;
-            transition: background 0.25s ease;
-            text-decoration: none;
-            color: inherit;
+            flex: 1; min-width: 0; display: flex; flex-direction: column;
+            cursor: pointer; padding: 2rem 1.75rem;
+            border: 1px solid var(--border); border-right: none;
+            transition: background 0.25s ease; color: inherit;
         }
-        .chain-node:last-child {
-            border-right: 1px solid var(--border);
-        }
+        .chain-node:last-child { border-right: 1px solid var(--border); }
         .chain-node:hover { background: rgba(107,158,122,0.06); }
         .chain-node.active { background: var(--dark); }
         .chain-node.active .chain-num,
         .chain-node.active .chain-title { color: #fff; }
         .chain-node.active .chain-arrow { color: rgba(255,255,255,0.3); }
-
         .chain-num {
             font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
-            color: var(--muted); margin-bottom: 2rem;
-            transition: color 0.25s;
+            color: var(--muted); margin-bottom: 2rem; transition: color 0.25s;
         }
         .chain-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.05rem; font-weight: 400;
-            color: var(--dark); line-height: 1.25;
-            flex: 1;
-            transition: color 0.25s;
+            font-size: 1.05rem; font-weight: 400; color: var(--dark);
+            line-height: 1.25; flex: 1; transition: color 0.25s;
         }
         .chain-arrow {
-            margin-top: 2rem;
-            font-size: 1rem;
-            color: rgba(107,158,122,0.5);
-            transition: color 0.25s, transform 0.25s;
-            display: block;
-            line-height: 1;
+            margin-top: 2rem; font-size: 1rem; color: rgba(107,158,122,0.5);
+            transition: color 0.25s, transform 0.25s; display: block; line-height: 1;
         }
-        .chain-node:hover .chain-arrow {
-            transform: translateX(3px);
-            color: var(--accent);
-        }
+        .chain-node:hover .chain-arrow { transform: translateX(3px); color: var(--accent); }
         .chain-node.active .chain-arrow { transform: translateX(3px); }
 
         /* ── SERVICE DETAIL SECTIONS ── */
         .service-detail {
-            padding: 4rem 3rem;
-            border-top: 1px solid var(--border);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+            padding: 4rem 3rem; border-top: 1px solid var(--border);
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
         }
         .detail-header { grid-column: 1 / -1; margin-bottom: 2rem; }
         .detail-number {
-            display: inline-block;
-            font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-            color: var(--muted); margin-right: 1rem;
+            display: inline-block; font-size: 0.65rem; letter-spacing: 0.15em;
+            text-transform: uppercase; color: var(--muted); margin-right: 1rem;
         }
         .detail-title {
-            display: inline;
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            font-weight: 400; color: var(--dark);
+            display: inline; font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 400; color: var(--dark);
         }
         .detail-tagline {
             display: block; margin-top: 0.5rem;
@@ -260,19 +191,14 @@
             border: 1px solid var(--border); aspect-ratio: 16 / 10;
         }
         .detail-image img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.3s ease;
+            width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;
         }
         .detail-image:hover img { transform: scale(1.05); }
 
         /* ── CONTACT ── */
-        #contact {
-            display: grid; grid-template-columns: 1fr 1fr;
-            border-top: 1px solid var(--border);
-        }
+        #contact { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); }
         .contact-left {
-            padding: 5rem 3rem;
-            background: var(--dark); color: #fff;
+            padding: 5rem 3rem; background: var(--dark); color: #fff;
             display: flex; flex-direction: column; justify-content: space-between;
         }
         .contact-kicker {
@@ -281,28 +207,20 @@
         }
         .contact-heading {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 400; line-height: 1.05; letter-spacing: -0.02em;
+            font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; line-height: 1.05; letter-spacing: -0.02em;
         }
         .contact-email {
-            display: inline-block;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem; font-weight: 400;
-            color: rgba(255,255,255,0.75);
+            display: inline-block; font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; font-weight: 400; color: rgba(255,255,255,0.75);
             text-decoration: none; letter-spacing: 0.01em;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding-bottom: 3px;
+            border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px;
             transition: color 0.2s, border-color 0.2s;
         }
         .contact-email:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
-        .contact-right {
-            border-left: 1px solid var(--border);
-            display: flex; flex-direction: column;
-        }
+        .contact-right { border-left: 1px solid var(--border); display: flex; flex-direction: column; }
         .team-member {
             padding: 3rem; border-bottom: 1px solid var(--border);
-            flex: 1; display: flex; align-items: flex-start; gap: 2rem;
-            transition: background 0.3s;
+            flex: 1; display: flex; align-items: flex-start; gap: 2rem; transition: background 0.3s;
         }
         .team-member:last-child { border-bottom: none; }
         .team-member:hover { background: rgba(107,158,122,0.05); }
@@ -311,20 +229,16 @@
             width: 120px; height: 120px; border-radius: 50%;
             object-fit: cover; border: 2px solid var(--accent); display: block;
         }
-        .member-content {
-            flex: 1; display: flex; flex-direction: column; justify-content: space-between;
-        }
+        .member-content { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .member-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem; font-weight: 400;
+            font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400;
             color: var(--dark); margin-bottom: 1rem; line-height: 1.2;
         }
         .member-skills { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
         .skill-badge {
             font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
             color: var(--muted); background: rgba(107,158,122,0.08);
-            padding: 0.5rem 0.9rem; border-radius: 20px;
-            border: 1px solid rgba(107,158,122,0.2);
+            padding: 0.5rem 0.9rem; border-radius: 20px; border: 1px solid rgba(107,158,122,0.2);
         }
         .member-linkedin {
             font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
@@ -351,92 +265,69 @@
             overflow: hidden; display: flex; align-items: flex-end;
         }
         .whyus-hero-bg {
-            position: absolute; inset: 0;
-            background: #2a3d30;
+            position: absolute; inset: 0; background: #2a3d30;
             background-image: url('TeamPhoto.jpg');
             background-size: cover; background-position: center 30%;
         }
         .whyus-hero-overlay {
             position: absolute; inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(10,16,12,0.1) 0%,
-                rgba(10,16,12,0.0) 30%,
-                rgba(10,16,12,0.65) 100%
-            );
+            background: linear-gradient(to bottom, rgba(10,16,12,0.1) 0%, rgba(10,16,12,0.0) 30%, rgba(10,16,12,0.65) 100%);
         }
         .whyus-hero-content {
-            position: relative; z-index: 2;
-            padding: 0 3rem 3.5rem; width: 100%;
+            position: relative; z-index: 2; padding: 0 3rem 3.5rem; width: 100%;
         }
         .whyus-hero-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 7vw, 6rem);
-            font-weight: 400; line-height: 0.95;
+            font-size: clamp(3rem, 7vw, 6rem); font-weight: 400; line-height: 0.95;
             color: #fff; letter-spacing: -0.02em;
         }
         .whyus-hero-title em { font-style: italic; }
 
-        /* ── WHY US BODY ── */
         .whyus-body { padding: 5rem 3rem; max-width: 860px; }
-
         .whyus-lead {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.4rem, 2.5vw, 2rem);
-            font-weight: 400; line-height: 1.45;
+            font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 400; line-height: 1.45;
             color: var(--dark); margin-bottom: 3rem;
         }
-
-        .whyus-text {
-            font-size: 0.95rem; line-height: 1.85;
-            color: var(--muted); margin-bottom: 1.5rem;
-        }
+        .whyus-text { font-size: 0.95rem; line-height: 1.85; color: var(--muted); margin-bottom: 1.5rem; }
 
         /* ── RESEARCH SECTION ── */
-        .research-block {
-            margin-top: 4rem;
-            padding-top: 4rem;
-            border-top: 1px solid var(--border);
-        }
+        .research-block { margin-top: 4rem; padding-top: 4rem; border-top: 1px solid var(--border); }
         .research-label {
             font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
             color: var(--muted); margin-bottom: 0.75rem; display: block;
         }
         .research-heading {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.5rem, 3vw, 2.2rem);
-            font-weight: 400; color: var(--dark);
+            font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 400; color: var(--dark);
             margin-bottom: 1.5rem; line-height: 1.1;
         }
         .research-intro {
-            font-size: 0.95rem; line-height: 1.85;
-            color: var(--muted); margin-bottom: 2.5rem; max-width: 680px;
+            font-size: 0.95rem; line-height: 1.85; color: var(--muted);
+            margin-bottom: 2.5rem; max-width: 680px;
         }
-        .paper-list {
-            display: flex; flex-direction: column; gap: 0;
-        }
+        .paper-list { display: flex; flex-direction: column; gap: 0; }
         .paper-item {
-            padding: 1.75rem 0;
-            border-top: 1px solid var(--border);
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 0 2rem;
-            align-items: start;
+            padding: 1.75rem 0; border-top: 1px solid var(--border);
+            display: grid; grid-template-columns: 56px 1fr; gap: 0 2rem; align-items: start;
         }
         .paper-item:last-child { border-bottom: 1px solid var(--border); }
         .paper-year {
-            font-size: 0.68rem; letter-spacing: 0.12em;
-            color: var(--muted); padding-top: 0.25rem;
-            white-space: nowrap;
+            font-size: 0.68rem; letter-spacing: 0.12em; color: var(--muted);
+            padding-top: 0.2rem; white-space: nowrap;
         }
         .paper-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem; font-weight: 400;
-            font-style: italic; color: var(--dark);
-            line-height: 1.4; margin-bottom: 0.35rem;
+            font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 400;
+            font-style: italic; color: var(--dark); line-height: 1.4; margin-bottom: 0.35rem;
+            text-decoration: none; display: block; transition: color 0.2s;
         }
-        .paper-venue {
-            font-size: 0.8rem; color: var(--muted); letter-spacing: 0.03em;
+        a.paper-title:hover { color: var(--accent); }
+        .paper-meta { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.02em; line-height: 1.5; }
+        .paper-type {
+            display: inline-block; font-size: 0.6rem; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--accent);
+            border: 1px solid rgba(107,158,122,0.35); border-radius: 3px;
+            padding: 0.2rem 0.5rem; margin-top: 0.5rem;
         }
 
         /* ── SOFTWARE PAGE ── */
@@ -445,62 +336,38 @@
             overflow: hidden; display: flex; align-items: center; justify-content: flex-start;
             background: linear-gradient(135deg, #2a3d30 0%, #1a2822 100%);
         }
-        .software-hero-content {
-            position: relative; z-index: 2; padding: 0 3rem; max-width: 800px;
-        }
+        .software-hero-content { position: relative; z-index: 2; padding: 0 3rem; max-width: 800px; }
         .software-hero-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 400; line-height: 1.05;
+            font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 400; line-height: 1.05;
             color: #fff; letter-spacing: -0.02em; margin-bottom: 1.5rem;
         }
-        .software-hero-desc {
-            font-size: 1rem; line-height: 1.6;
-            color: rgba(255,255,255,0.75); max-width: 600px;
-        }
+        .software-hero-desc { font-size: 1rem; line-height: 1.6; color: rgba(255,255,255,0.75); max-width: 600px; }
+
         .software-tools { padding: 5rem 3rem; }
-        .tool-section {
-            margin-bottom: 6rem; padding-bottom: 4rem;
-            border-bottom: 1px solid var(--border);
-        }
+        .tool-section { margin-bottom: 6rem; padding-bottom: 4rem; border-bottom: 1px solid var(--border); }
         .tool-section:last-child { border-bottom: none; margin-bottom: 0; }
         .tool-header { margin-bottom: 3rem; }
         .tool-name {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
-            font-weight: 400; color: var(--dark);
+            font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; color: var(--dark);
             margin-bottom: 0.8rem; line-height: 1.1;
         }
-        .tool-status {
-            display: inline-block; font-size: 0.65rem;
-            letter-spacing: 0.12em; text-transform: uppercase;
-            color: #fff; background: var(--accent);
-            padding: 0.4rem 0.8rem; border-radius: 3px; margin-bottom: 1rem;
-        }
         .tool-description {
-            font-size: 0.95rem; line-height: 1.7; color: var(--muted);
-            max-width: 700px; margin-bottom: 2.5rem;
+            font-size: 0.95rem; line-height: 1.7; color: var(--muted); max-width: 700px; margin-bottom: 2.5rem;
         }
-        .tool-screenshots {
-            display: flex; gap: 2rem; flex-wrap: wrap;
-            justify-content: flex-start; align-items: flex-start;
-        }
+        .tool-screenshots { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; }
         .screenshot {
-            flex: 0 0 auto; width: 220px;
-            border-radius: 12px; overflow: hidden;
+            flex: 0 0 auto; width: 220px; border-radius: 12px; overflow: hidden;
             background: linear-gradient(135deg, #e8f5f0 0%, #d4f1e4 100%);
             border: 1px solid var(--border); display: flex; align-items: center;
-            justify-content: center; color: var(--muted);
-            font-size: 0.85rem; text-align: center; padding: 1rem;
+            justify-content: center; color: var(--muted); font-size: 0.85rem; text-align: center; padding: 1rem;
         }
         .screenshot img { width: 100%; height: auto; display: block; object-fit: contain; }
         .screenshot:has(img[src]) { padding: 0; }
 
         /* ── REVEAL ── */
-        .reveal {
-            opacity: 0; transform: translateY(28px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .reveal.visible { opacity: 1; transform: none; }
         .reveal-delay-1 { transition-delay: 0.1s; }
         .reveal-delay-2 { transition-delay: 0.2s; }
@@ -528,7 +395,8 @@
             .detail-image { aspect-ratio: 16 / 9; }
             .whyus-hero-content { padding: 0 1.5rem 2.5rem; }
             .whyus-body { padding: 3rem 1.5rem; }
-            .paper-item { grid-template-columns: 1fr; gap: 0.5rem; }
+            .paper-item { grid-template-columns: 1fr; gap: 0.4rem; }
+            .paper-year { padding-top: 0; }
             .software-hero-content { padding: 0 1.5rem; }
             .software-tools { padding: 3rem 1.5rem; }
             .tool-section { margin-bottom: 4rem; padding-bottom: 3rem; }
@@ -581,7 +449,6 @@
                 <span class="section-label">What we do</span>
                 <h2 class="section-title">Our Services</h2>
             </div>
-
             <div class="chain-diagram reveal reveal-delay-1">
                 <div class="chain-node" id="node-1" onclick="scrollToSection('service-structure')">
                     <span class="chain-num">01</span>
@@ -622,7 +489,7 @@
                     <p class="detail-text">[Placeholder text: Comprehensive structural planning and implementation for vertical greenery systems. Climbing aids, support structures, load calculations, and building integration solutions tailored to your project requirements.]</p>
                 </div>
                 <div class="detail-image">
-                    <img src="GRETA1.PNG" alt="Structure - Technical Framework" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'">
+                    <img src="AquaCalc1.PNG" alt="Structure" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'">
                 </div>
             </div>
         </section>
@@ -635,10 +502,10 @@
             </div>
             <div class="detail-body">
                 <div class="detail-content">
-                    <p class="detail-text">[Placeholder text: Expert substrate profiling, drainage systems, and nutrient management for optimal plant growth. Custom solutions for weight constraints, water retention, and long-term viability.]</p>
+                    <p class="detail-text">[Placeholder text: Expert substrate profiling, drainage systems, and nutrient management for optimal plant growth.]</p>
                 </div>
                 <div class="detail-image">
-                    <img src="INGRID1.PNG" alt="Soil & Substrate" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'">
+                    <img src="Greensight.PNG" alt="Soil & Substrate" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'">
                 </div>
             </div>
         </section>
@@ -651,10 +518,10 @@
             </div>
             <div class="detail-body">
                 <div class="detail-content">
-                    <p class="detail-text">[Placeholder text: Vegetation selection based on climate, light conditions, and aesthetic requirements. Growth behavior analysis and long-term maintenance planning for sustainable green installations.]</p>
+                    <p class="detail-text">[Placeholder text: Vegetation selection based on climate, light conditions, and aesthetic requirements.]</p>
                 </div>
                 <div class="detail-image">
-                    <img src="AquaCalc1.PNG" alt="Plants - Botanical Expertise" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'">
+                    <img src="AquaCalc1.PNG" alt="Plants" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'">
                 </div>
             </div>
         </section>
@@ -667,7 +534,7 @@
             </div>
             <div class="detail-body">
                 <div class="detail-content">
-                    <p class="detail-text">[Placeholder text: Smart irrigation systems, water demand calculation, and automated monitoring for efficient plant hydration. Integration with building management systems.]</p>
+                    <p class="detail-text">[Placeholder text: Smart irrigation systems, water demand calculation, and automated monitoring for efficient plant hydration.]</p>
                 </div>
                 <div class="detail-image">
                     <img src="Greensight.PNG" alt="Irrigation Technology" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'">
@@ -683,7 +550,7 @@
             </div>
             <div class="detail-body">
                 <div class="detail-content">
-                    <p class="detail-text">[Placeholder text: Comprehensive maintenance planning, seasonal care programs, and performance optimization to ensure your green infrastructure thrives for years to come.]</p>
+                    <p class="detail-text">[Placeholder text: Comprehensive maintenance planning, seasonal care programs, and performance optimization.]</p>
                 </div>
                 <div class="detail-image">
                     <img src="LoniceraHeck.JPG" alt="Maintenance Expertise" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'">
@@ -762,35 +629,100 @@
             <div class="research-block reveal">
                 <span class="research-label">Scientific work</span>
                 <h2 class="research-heading">Grounded in research</h2>
-                <p class="research-intro">Our consulting is informed by peer-reviewed research in urban greening, thermal comfort, and nature-based solutions. Selected publications:</p>
+                <p class="research-intro">Our consulting is informed by peer-reviewed research in urban greening, building physics, and nature-based solutions — conducted at BOKU University Vienna and published in international journals.</p>
 
                 <div class="paper-list">
+
                     <div class="paper-item">
-                        <span class="paper-year">2024</span>
+                        <span class="paper-year">2026</span>
                         <div>
-                            <div class="paper-title">Evapotranspiration-based water demand modelling for vertical greening systems in Central European climates</div>
-                            <div class="paper-venue">Placeholder journal — replace with actual venue</div>
+                            <a class="paper-title" href="https://doi.org/10.1093/forestry/cpaf056" target="_blank" rel="noopener">
+                                Unveiling drought stress in conifers: canopy temperature and transpiration monitoring in a controlled setting
+                            </a>
+                            <div class="paper-meta">Gräf M, Hietz P, Stangl R, Poiss M, D'Urso G, Lederbauer S et al.<br><em>Forestry</em>, 99(2)</div>
+                            <span class="paper-type">Journal article</span>
                         </div>
                     </div>
+
                     <div class="paper-item">
-                        <span class="paper-year">2023</span>
+                        <span class="paper-year">2026</span>
                         <div>
-                            <div class="paper-title">Surface temperature reduction through facade greening: a field measurement study in an urban canyon context</div>
-                            <div class="paper-venue">Placeholder journal — replace with actual venue</div>
+                            <a class="paper-title" href="https://journal.ifm.tuwien.ac.at/issue/86/galley/88/view/" target="_blank" rel="noopener">
+                                High-Performance Climbing Plants for Urban Climate Improvement: Maintenance Strategies for Climbing Plants in Vertical Greening Systems
+                            </a>
+                            <div class="paper-meta">Briefer A, Poiss M, Stangl R.<br><em>Journal für Facility Management</em>, 1(27/2025):66–83</div>
+                            <span class="paper-type">Journal article</span>
                         </div>
                     </div>
+
                     <div class="paper-item">
-                        <span class="paper-year">2022</span>
+                        <span class="paper-year">2025</span>
                         <div>
-                            <div class="paper-title">Species selection criteria for low-maintenance extensive green roofs: linking substrate depth to long-term plant coverage</div>
-                            <div class="paper-venue">Placeholder journal — replace with actual venue</div>
+                            <a class="paper-title" href="https://doi.org/10.1016/j.buildenv.2025.113399" target="_blank" rel="noopener">
+                                Vertical greenery as natural shading of glass facades: Bioshading coefficients for 4 climbing plant species for assessment of shading performance
+                            </a>
+                            <div class="paper-meta">Poiss M, Briefer A, Scharf B, Spörl P, Stangl R.<br><em>Building and Environment</em>, 283:113399</div>
+                            <span class="paper-type">Journal article</span>
+                        </div>
+                    </div>
+
+                    <div class="paper-item">
+                        <span class="paper-year">2025</span>
+                        <div>
+                            <a class="paper-title" href="https://nachhaltigwirtschaften.at/de/sdz/projekte/glas-gruen.php" target="_blank" rel="noopener">
+                                GLASGrün-Pflegeleitfaden zum wirksamen Einsatz von Vertikalbegrünungen bei Gebäuden mit Glasflächen
+                            </a>
+                            <div class="paper-meta">Poiss M, Briefer A, Wultsch T, Scharf B, Pitha U, Stangl R.<br><em>Berichte aus Energie- und Umweltforschung</em> 60c/2025. FFG</div>
+                            <span class="paper-type">Project report</span>
+                        </div>
+                    </div>
+
+                    <div class="paper-item">
+                        <span class="paper-year">2025</span>
+                        <div>
+                            <a class="paper-title" href="https://nachhaltigwirtschaften.at/de/sdz/projekte/glas-gruen.php#publications" target="_blank" rel="noopener">
+                                GLASGrün-Leitfaden und Variantenkatalog zum wirksamen Einsatz von Vertikalbegrünungen bei Gebäuden mit Glasflächen
+                            </a>
+                            <div class="paper-meta">Briefer AK, Poiss M, Wultsch T, Scharf B, Pitha U, Smetschka B et al.<br><em>Berichte aus Energie- und Umweltforschung</em> 60b/2025. FFG</div>
+                            <span class="paper-type">Project report</span>
+                        </div>
+                    </div>
+
+                    <div class="paper-item">
+                        <span class="paper-year">2025</span>
+                        <div>
+                            <span class="paper-title">
+                                Grün vor Glas: Nachrüstbare Verschattungssysteme mit Kletterpflanzen
+                            </span>
+                            <div class="paper-meta">Briefer A, Poiss M, Smetschka B, Pitha U, Scharf B, Stangl R.<br><em>Neue Landschaft</em>, 10/2025:27–32</div>
+                            <span class="paper-type">Journal article</span>
+                        </div>
+                    </div>
+
+                    <div class="paper-item">
+                        <span class="paper-year">2025</span>
+                        <div>
+                            <span class="paper-title">
+                                Ein Modell für klimaresiliente Stadtentwicklung
+                            </span>
+                            <div class="paper-meta">Briefer A, Poiss M, Stangl R.<br><em>Galabau Journal</em>, 3/2025:7–11</div>
+                            <span class="paper-type">Journal article</span>
+                        </div>
+                    </div>
+
+                    <div class="paper-item">
+                        <span class="paper-year">2025</span>
+                        <div>
+                            <a class="paper-title" href="https://doi.org/10.5281/zenodo.17046455" target="_blank" rel="noopener">
+                                GLASGrün — Regulation of Climate, Energy Demand, and Well-being in Glass Structures through Building-integrated Vertical Greenery: Raw Data Survey
+                            </a>
+                            <div class="paper-meta">Smetschka B, Wang J, Haas W, Baumgart A, Poiss M, Briefer A et al.<br>Zenodo</div>
+                            <span class="paper-type">Dataset</span>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 
     <!-- SOFTWARE PAGE -->
@@ -834,9 +766,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 
     <footer>
@@ -863,10 +793,7 @@
         function observeReveals() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(e => {
-                    if (e.isIntersecting) {
-                        e.target.classList.add('visible');
-                        observer.unobserve(e.target);
-                    }
+                    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
                 });
             }, { threshold: 0.12 });
             document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
