@@ -1,828 +1,844 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diekmann & Poiss — Building Greenery Software</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        :root {
-            --off-white: #f5f3ef;
-            --dark: #1a1f1c;
-            --mid: #3d4840;
-            --muted: #8a9490;
-            --accent: #6b9e7a;
-            --border: rgba(26,31,28,0.12);
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            background: var(--off-white);
-            color: var(--dark);
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 300;
-            overflow-x: hidden;
-        }
-
-        /* ── NAV ── */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1.5rem 3rem;
-            mix-blend-mode: difference;
-        }
-        .nav-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem; font-weight: 400;
-            color: #fff; letter-spacing: 0.03em;
-            cursor: pointer; background: none; border: none;
-        }
-        .nav-links { display: flex; gap: 2.5rem; }
-        .nav-links button {
-            font-size: 0.72rem; font-weight: 400; letter-spacing: 0.15em;
-            text-transform: uppercase; color: #fff;
-            background: none; border: none; cursor: pointer;
-            font-family: 'DM Sans', sans-serif; transition: opacity 0.2s;
-        }
-        .nav-links button:hover { opacity: 0.6; }
-
-        /* ── HERO ── */
-        #hero {
-            position: relative; height: 100vh; min-height: 600px;
-            overflow: hidden; display: flex; align-items: flex-end;
-        }
-        .hero-bg {
-            position: absolute; inset: 0; background: #2a3d30;
-            background-image: url('LoniceraHeck.JPG');
-            background-size: cover; background-position: center 40%;
-            will-change: transform;
-        }
-        .hero-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to bottom, rgba(10,16,12,0.15) 0%, rgba(10,16,12,0.0) 40%, rgba(10,16,12,0.55) 100%);
-        }
-        .hero-content {
-            position: relative; z-index: 2; padding: 0 3rem 3.5rem;
-            width: 100%; display: flex; justify-content: space-between; align-items: flex-end;
-        }
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3.5rem, 8vw, 7rem);
-            font-weight: 400; line-height: 0.95;
-            color: #fff; letter-spacing: -0.02em;
-        }
-        .hero-title em { font-style: italic; }
-        .hero-tagline {
-            font-size: 0.78rem; font-weight: 400; letter-spacing: 0.18em;
-            text-transform: uppercase; color: rgba(255,255,255,0.7);
-            text-align: right; line-height: 1.8; padding-bottom: 0.5rem;
-        }
-        .hero-scroll {
-            position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
-            z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px;
-        }
-        .hero-scroll span {
-            font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-            color: rgba(255,255,255,0.5);
-        }
-        .scroll-line {
-            width: 1px; height: 48px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
-            animation: scrollpulse 2s ease-in-out infinite;
-        }
-        @keyframes scrollpulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
-
-        /* ── INTRO ── */
-        #intro { padding: 4rem 3rem; border-top: 1px solid var(--border); }
-        .intro-body p {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.5rem, 3vw, 2.2rem);
-            font-weight: 400; line-height: 1.45; color: var(--dark); max-width: 680px;
-        }
-
-        /* ── IMAGE BAND ── */
-        .image-band {
-            height: 55vh; min-height: 360px;
-            overflow: hidden; border-top: 1px solid var(--border); position: relative;
-        }
-        .image-band img {
-            width: 100%; height: 100%; object-fit: cover; object-position: center 60%;
-            display: block; filter: saturate(0.85);
-        }
-        .band-caption {
-            position: absolute; bottom: 1.5rem; right: 2rem;
-            font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
-            color: rgba(255,255,255,0.5);
-        }
-
-        /* ── SERVICES ── */
-        #services { padding: 5rem 3rem 4rem; border-top: 1px solid var(--border); }
-        .services-header { margin-bottom: 4rem; }
-        .section-label {
-            font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
-            color: var(--muted); margin-bottom: 0.75rem; display: block;
-        }
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; color: var(--dark); line-height: 1.05;
-        }
-
-        /* ── CHAIN DIAGRAM ── */
-        .chain-diagram {
-            display: flex; align-items: stretch; gap: 0;
-            overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
-        }
-        .chain-diagram::-webkit-scrollbar { display: none; }
-        .chain-node {
-            flex: 1; min-width: 0; display: flex; flex-direction: column;
-            cursor: pointer; padding: 2rem 1.75rem;
-            border: 1px solid var(--border); border-right: none;
-            transition: background 0.25s ease; color: inherit;
-        }
-        .chain-node:last-child { border-right: 1px solid var(--border); }
-        .chain-node:hover { background: rgba(107,158,122,0.06); }
-        .chain-node.active { background: var(--dark); }
-        .chain-node.active .chain-num,
-        .chain-node.active .chain-title { color: #fff; }
-        .chain-node.active .chain-arrow { color: rgba(255,255,255,0.3); }
-        .chain-num {
-            font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
-            color: var(--muted); margin-bottom: 2rem; transition: color 0.25s;
-        }
-        .chain-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.05rem; font-weight: 400; color: var(--dark);
-            line-height: 1.25; flex: 1; transition: color 0.25s;
-        }
-        .chain-arrow {
-            margin-top: 2rem; font-size: 1rem; color: rgba(107,158,122,0.5);
-            transition: color 0.25s, transform 0.25s; display: block; line-height: 1;
-        }
-        .chain-node:hover .chain-arrow { transform: translateX(3px); color: var(--accent); }
-        .chain-node.active .chain-arrow { transform: translateX(3px); }
-
-        /* ── SERVICE DETAIL SECTIONS ── */
-        .service-detail {
-            padding: 4rem 3rem; border-top: 1px solid var(--border);
-            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
-        }
-        .detail-header { grid-column: 1 / -1; margin-bottom: 2rem; }
-        .detail-number {
-            display: inline-block; font-size: 0.65rem; letter-spacing: 0.15em;
-            text-transform: uppercase; color: var(--muted); margin-right: 1rem;
-        }
-        .detail-title {
-            display: inline; font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 400; color: var(--dark);
-        }
-        .detail-tagline {
-            display: block; margin-top: 0.5rem;
-            font-size: 0.85rem; color: var(--muted); letter-spacing: 0.05em;
-        }
-        .detail-body { display: contents; }
-        .detail-content { padding-right: 2rem; }
-        .detail-text { font-size: 0.95rem; line-height: 1.75; color: var(--muted); }
-        .detail-image {
-            border-radius: 12px; overflow: hidden;
-            border: 1px solid var(--border); aspect-ratio: 16 / 10;
-        }
-        .detail-image img {
-            width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;
-        }
-        .detail-image:hover img { transform: scale(1.05); }
-
-        /* ── CONTACT ── */
-        #contact { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); }
-        .contact-left {
-            padding: 5rem 3rem; background: var(--dark); color: #fff;
-            display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .contact-kicker {
-            font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
-            color: rgba(255,255,255,0.4); margin-bottom: 1.5rem;
-        }
-        .contact-heading {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; line-height: 1.05; letter-spacing: -0.02em;
-        }
-        .contact-email {
-            display: inline-block; font-family: 'Playfair Display', serif;
-            font-size: 1.1rem; font-weight: 400; color: rgba(255,255,255,0.75);
-            text-decoration: none; letter-spacing: 0.01em;
-            border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px;
-            transition: color 0.2s, border-color 0.2s;
-        }
-        .contact-email:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
-        .contact-right { border-left: 1px solid var(--border); display: flex; flex-direction: column; }
-        .team-member {
-            padding: 3rem; border-bottom: 1px solid var(--border);
-            flex: 1; display: flex; align-items: flex-start; gap: 2rem; transition: background 0.3s;
-        }
-        .team-member:last-child { border-bottom: none; }
-        .team-member:hover { background: rgba(107,158,122,0.05); }
-        .member-image-container { flex-shrink: 0; }
-        .member-image {
-            width: 120px; height: 120px; border-radius: 50%;
-            object-fit: cover; border: 2px solid var(--accent); display: block;
-        }
-        .member-content { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .member-name {
-            font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400;
-            color: var(--dark); margin-bottom: 1rem; line-height: 1.2;
-        }
-        .member-skills { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-        .skill-badge {
-            font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
-            color: var(--muted); background: rgba(107,158,122,0.08);
-            padding: 0.5rem 0.9rem; border-radius: 20px; border: 1px solid rgba(107,158,122,0.2);
-        }
-        .member-linkedin {
-            font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-            color: var(--muted); text-decoration: none; transition: color 0.2s;
-            display: inline-flex; align-items: center; gap: 0.5rem; width: fit-content;
-        }
-        .member-linkedin:hover { color: var(--accent); }
-        .member-linkedin::after { content: '↗'; font-size: 0.85em; }
-
-        /* ── FOOTER ── */
-        footer {
-            padding: 1.25rem 3rem; border-top: 1px solid var(--border);
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        footer span { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--muted); }
-
-        /* ── PAGE VISIBILITY ── */
-        .page { display: none; }
-        .page.active { display: block; }
-
-        /* ── WHY US PAGE ── */
-        #whyus-hero {
-            position: relative; height: 60vh; min-height: 400px;
-            overflow: hidden; display: flex; align-items: flex-end;
-        }
-        .whyus-hero-bg {
-            position: absolute; inset: 0; background: #2a3d30;
-            background-image: url('TeamPhoto.jpg');
-            background-size: cover; background-position: center 30%;
-        }
-        .whyus-hero-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to bottom, rgba(10,16,12,0.1) 0%, rgba(10,16,12,0.0) 30%, rgba(10,16,12,0.65) 100%);
-        }
-        .whyus-hero-content {
-            position: relative; z-index: 2; padding: 0 3rem 3.5rem; width: 100%;
-        }
-        .whyus-hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 7vw, 6rem); font-weight: 400; line-height: 0.95;
-            color: #fff; letter-spacing: -0.02em;
-        }
-        .whyus-hero-title em { font-style: italic; }
-
-        .whyus-body { padding: 5rem 3rem; max-width: 860px; }
-        .whyus-lead {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 400; line-height: 1.45;
-            color: var(--dark); margin-bottom: 3rem;
-        }
-        .whyus-text { font-size: 0.95rem; line-height: 1.85; color: var(--muted); margin-bottom: 1.5rem; }
-
-        /* ── RESEARCH SECTION ── */
-        .research-block { margin-top: 4rem; padding-top: 4rem; border-top: 1px solid var(--border); }
-        .research-label {
-            font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
-            color: var(--muted); margin-bottom: 0.75rem; display: block;
-        }
-        .research-heading {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 400; color: var(--dark);
-            margin-bottom: 1.5rem; line-height: 1.1;
-        }
-        .research-intro {
-            font-size: 0.95rem; line-height: 1.85; color: var(--muted);
-            margin-bottom: 2.5rem; max-width: 680px;
-        }
-        .paper-list { display: flex; flex-direction: column; gap: 0; }
-        .paper-item {
-            padding: 1.75rem 0; border-top: 1px solid var(--border);
-            display: grid; grid-template-columns: 56px 1fr; gap: 0 2rem; align-items: start;
-        }
-        .paper-item:last-child { border-bottom: 1px solid var(--border); }
-        .paper-year {
-            font-size: 0.68rem; letter-spacing: 0.12em; color: var(--muted);
-            padding-top: 0.2rem; white-space: nowrap;
-        }
-        .paper-title {
-            font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 400;
-            font-style: italic; color: var(--dark); line-height: 1.4; margin-bottom: 0.35rem;
-            text-decoration: none; display: block; transition: color 0.2s;
-        }
-        a.paper-title:hover { color: var(--accent); }
-        .paper-meta { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.02em; line-height: 1.5; }
-        .paper-type {
-            display: inline-block; font-size: 0.6rem; letter-spacing: 0.1em;
-            text-transform: uppercase; color: var(--accent);
-            border: 1px solid rgba(107,158,122,0.35); border-radius: 3px;
-            padding: 0.2rem 0.5rem; margin-top: 0.5rem;
-        }
-
-        /* ── SOFTWARE PAGE ── */
-        #software-hero {
-            position: relative; height: 60vh; min-height: 400px;
-            overflow: hidden; display: flex; align-items: center; justify-content: flex-start;
-            background: linear-gradient(135deg, #2a3d30 0%, #1a2822 100%);
-        }
-        .software-hero-content { position: relative; z-index: 2; padding: 0 3rem; max-width: 800px; }
-        .software-hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 400; line-height: 1.05;
-            color: #fff; letter-spacing: -0.02em; margin-bottom: 1.5rem;
-        }
-        .software-hero-desc { font-size: 1rem; line-height: 1.6; color: rgba(255,255,255,0.75); max-width: 600px; }
-
-        .software-tools { padding: 5rem 3rem; }
-        .tool-section { margin-bottom: 6rem; padding-bottom: 4rem; border-bottom: 1px solid var(--border); }
-        .tool-section:last-child { border-bottom: none; margin-bottom: 0; }
-        .tool-header { margin-bottom: 3rem; }
-        .tool-name {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; color: var(--dark);
-            margin-bottom: 0.8rem; line-height: 1.1;
-        }
-        .tool-description {
-            font-size: 0.95rem; line-height: 1.7; color: var(--muted); max-width: 700px; margin-bottom: 2.5rem;
-        }
-        .tool-screenshots { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; }
-        .screenshot {
-            flex: 0 0 auto; width: 220px; border-radius: 12px; overflow: hidden;
-            background: linear-gradient(135deg, #e8f5f0 0%, #d4f1e4 100%);
-            border: 1px solid var(--border); display: flex; align-items: center;
-            justify-content: center; color: var(--muted); font-size: 0.85rem; text-align: center; padding: 1rem;
-        }
-        .screenshot img { width: 100%; height: auto; display: block; object-fit: contain; }
-        .screenshot:has(img[src]) { padding: 0; }
-
-        /* ── REVEAL ── */
-        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
-        .reveal.visible { opacity: 1; transform: none; }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
-
-        /* ── RESPONSIVE ── */
-        @media (max-width: 768px) {
-            nav { padding: 1.2rem 1.5rem; }
-            .hero-content { padding: 0 1.5rem 2.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .hero-tagline { text-align: left; }
-            #intro { padding: 3rem 1.5rem; }
-            #services { padding: 3.5rem 1.5rem 3rem; }
-            .chain-node { min-width: 140px; padding: 1.5rem 1.25rem; }
-            .chain-title { font-size: 0.9rem; }
-            #contact { grid-template-columns: 1fr; }
-            .contact-right { border-left: none; border-top: 1px solid var(--border); }
-            .contact-left { padding: 3.5rem 1.5rem; }
-            .team-member { padding: 2rem 1.5rem; flex-direction: column; align-items: center; text-align: center; gap: 1rem; }
-            .member-skills { justify-content: center; }
-            .member-linkedin { justify-content: center; }
-            footer { padding: 1rem 1.5rem; }
-            .service-detail { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
-            .detail-content { padding-right: 0; margin-bottom: 2rem; }
-            .detail-image { aspect-ratio: 16 / 9; }
-            .whyus-hero-content { padding: 0 1.5rem 2.5rem; }
-            .whyus-body { padding: 3rem 1.5rem; }
-            .paper-item { grid-template-columns: 1fr; gap: 0.4rem; }
-            .paper-year { padding-top: 0; }
-            .software-hero-content { padding: 0 1.5rem; }
-            .software-tools { padding: 3rem 1.5rem; }
-            .tool-section { margin-bottom: 4rem; padding-bottom: 3rem; }
-            .tool-screenshots { gap: 1rem; }
-            .screenshot { width: 140px; }
-        }
-    </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
 </head>
 <body>
-
-    <nav>
-        <button class="nav-logo" onclick="showPage('home')">Diekmann & Poiss</button>
-        <div class="nav-links">
-            <button onclick="showPage('whyus')">Why Us</button>
-            <button onclick="showPage('software')">Software</button>
-        </div>
-    </nav>
-
-    <!-- HOME PAGE -->
-    <div id="home" class="page active">
-        <section id="hero">
-            <div class="hero-bg" id="heroBg"></div>
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1 class="hero-title">Diekmann<br><em>& Poiss</em></h1>
-                <div class="hero-tagline">
-                    Building Greenery<br>Development of digital Solutions and consulting
-                </div>
-            </div>
-            <div class="hero-scroll">
-                <span>Scroll</span>
-                <div class="scroll-line"></div>
-            </div>
-        </section>
-
-        <section id="intro">
-            <div class="intro-body">
-                <p class="reveal">Planning tools and consulting for living architecture — indoor and outdoor</p>
-            </div>
-        </section>
-
-        <div class="image-band">
-            <img src="Schwarzau4.JPG" alt="Green Wall Project" onerror="this.parentElement.style.background='#2a3d30'">
-            <div class="band-caption"></div>
-        </div>
-
-        <section id="services">
-            <div class="services-header reveal">
-                <span class="section-label">What we do</span>
-                <h2 class="section-title">Our Services</h2>
-            </div>
-            <div class="chain-diagram reveal reveal-delay-1">
-                <div class="chain-node" id="node-1" onclick="scrollToSection('service-structure')">
-                    <span class="chain-num">01</span>
-                    <span class="chain-title">Structure &amp; Climbing Aid</span>
-                    <span class="chain-arrow">→</span>
-                </div>
-                <div class="chain-node" id="node-2" onclick="scrollToSection('service-soil')">
-                    <span class="chain-num">02</span>
-                    <span class="chain-title">Soil &amp; Substrate</span>
-                    <span class="chain-arrow">→</span>
-                </div>
-                <div class="chain-node" id="node-3" onclick="scrollToSection('service-plants')">
-                    <span class="chain-num">03</span>
-                    <span class="chain-title">Plants</span>
-                    <span class="chain-arrow">→</span>
-                </div>
-                <div class="chain-node" id="node-4" onclick="scrollToSection('service-irrigation')">
-                    <span class="chain-num">04</span>
-                    <span class="chain-title">Irrigation Technology</span>
-                    <span class="chain-arrow">→</span>
-                </div>
-                <div class="chain-node" id="node-5" onclick="scrollToSection('service-maintenance')">
-                    <span class="chain-num">05</span>
-                    <span class="chain-title">Maintenance Expertise</span>
-                    <span class="chain-arrow">→</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="service-structure" class="service-detail reveal">
-            <div class="detail-header">
-                <span class="detail-number">01</span>
-                <h3 class="detail-title">Structure</h3>
-                <span class="detail-tagline">Technical Framework & Building Integration</span>
-            </div>
-            <div class="detail-body">
-                <div class="detail-content">
-                    <p class="detail-text">[Placeholder text: Comprehensive structural planning and implementation for vertical greenery systems. Climbing aids, support structures, load calculations, and building integration solutions tailored to your project requirements.]</p>
-                </div>
-                <div class="detail-image">
-                    <img src="AquaCalc1.PNG" alt="Structure" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'">
-                </div>
-            </div>
-        </section>
-
-        <section id="service-soil" class="service-detail reveal reveal-delay-1">
-            <div class="detail-header">
-                <span class="detail-number">02</span>
-                <h3 class="detail-title">Soil & Substrate</h3>
-                <span class="detail-tagline">Growing Medium & Nutrient Systems</span>
-            </div>
-            <div class="detail-body">
-                <div class="detail-content">
-                    <p class="detail-text">[Placeholder text: Expert substrate profiling, drainage systems, and nutrient management for optimal plant growth.]</p>
-                </div>
-                <div class="detail-image">
-                    <img src="Greensight.PNG" alt="Soil & Substrate" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'">
-                </div>
-            </div>
-        </section>
-
-        <section id="service-plants" class="service-detail reveal reveal-delay-2">
-            <div class="detail-header">
-                <span class="detail-number">03</span>
-                <h3 class="detail-title">Plants</h3>
-                <span class="detail-tagline">Botanical Expertise & Species Selection</span>
-            </div>
-            <div class="detail-body">
-                <div class="detail-content">
-                    <p class="detail-text">[Placeholder text: Vegetation selection based on climate, light conditions, and aesthetic requirements.]</p>
-                </div>
-                <div class="detail-image">
-                    <img src="AquaCalc1.PNG" alt="Plants" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'">
-                </div>
-            </div>
-        </section>
-
-        <section id="service-irrigation" class="service-detail reveal reveal-delay-3">
-            <div class="detail-header">
-                <span class="detail-number">04</span>
-                <h3 class="detail-title">Irrigation Technology</h3>
-                <span class="detail-tagline">Water Management & Automation</span>
-            </div>
-            <div class="detail-body">
-                <div class="detail-content">
-                    <p class="detail-text">[Placeholder text: Smart irrigation systems, water demand calculation, and automated monitoring for efficient plant hydration.]</p>
-                </div>
-                <div class="detail-image">
-                    <img src="Greensight.PNG" alt="Irrigation Technology" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'">
-                </div>
-            </div>
-        </section>
-
-        <section id="service-maintenance" class="service-detail reveal reveal-delay-4">
-            <div class="detail-header">
-                <span class="detail-number">05</span>
-                <h3 class="detail-title">Maintenance Expertise</h3>
-                <span class="detail-tagline">Long-term Care & Optimization</span>
-            </div>
-            <div class="detail-body">
-                <div class="detail-content">
-                    <p class="detail-text">[Placeholder text: Comprehensive maintenance planning, seasonal care programs, and performance optimization.]</p>
-                </div>
-                <div class="detail-image">
-                    <img src="LoniceraHeck.JPG" alt="Maintenance Expertise" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'">
-                </div>
-            </div>
-        </section>
-
-        <div class="image-band">
-            <img src="Wisteria4.JPG" alt="Wisteria plant detail" onerror="this.parentElement.style.background='#2a3d30'">
-            <div class="band-caption"></div>
-        </div>
-
-        <section id="contact">
-            <div class="contact-left reveal">
-                <div>
-                    <div class="contact-kicker">Get in touch</div>
-                    <h2 class="contact-heading">Let's build<br>something<br>beautiful<br><em>that works.</em></h2>
-                </div>
-                <a href="mailto:diekmann-poiss@proton.me" class="contact-email">diekmann-poiss@proton.me</a>
-            </div>
-            <div class="contact-right">
-                <div class="team-member reveal">
-                    <div class="member-image-container">
-                        <img src="ProfileFridi.jpg" alt="Fridtjof Diekmann" class="member-image">
-                    </div>
-                    <div class="member-content">
-                        <div class="member-name">Fridtjof<br>Diekmann</div>
-                        <div class="member-skills">
-                            <span class="skill-badge">Technical implementation of vertical greening</span>
-                            <span class="skill-badge">Project coordination & digital implementation</span>
-                            <span class="skill-badge">Soil & substrate technology</span>
-                        </div>
-                        <a href="https://www.linkedin.com/in/fridtjof-diekmann-36a61b246" target="_blank" rel="noopener" class="member-linkedin">LinkedIn</a>
-                    </div>
-                </div>
-                <div class="team-member reveal reveal-delay-1">
-                    <div class="member-image-container">
-                        <img src="ProfileMax.jpg" alt="Max Poiss" class="member-image">
-                    </div>
-                    <div class="member-content">
-                        <div class="member-name">Max<br>Poiss</div>
-                        <div class="member-skills">
-                            <span class="skill-badge">Thermal comfort & nature based solutions</span>
-                            <span class="skill-badge">Vegetation technology</span>
-                            <span class="skill-badge">Automatisation & data analytics</span>
-                        </div>
-                        <a href="https://www.linkedin.com/in/max-poiss-0866b222b" target="_blank" rel="noopener" class="member-linkedin">LinkedIn</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- WHY US PAGE -->
-    <div id="whyus" class="page">
-        <section id="whyus-hero">
-            <div class="whyus-hero-bg"></div>
-            <div class="whyus-hero-overlay"></div>
-            <div class="whyus-hero-content">
-                <h1 class="whyus-hero-title">Why<br><em>us?</em></h1>
-            </div>
-        </section>
-
-        <div class="whyus-body">
-            <p class="whyus-lead reveal">We combine hands-on implementation experience with scientific rigour — two disciplines that rarely sit together in the same room.</p>
-            <p class="whyus-text reveal reveal-delay-1">Diekmann & Poiss grew out of years spent at the intersection of landscape architecture, building physics, and data science. We have planned, built, and monitored living wall and green roof systems across a range of building typologies — and used those projects as laboratories for the tools we now offer to clients.</p>
-            <p class="whyus-text reveal reveal-delay-2">Our approach is rooted in measurable outcomes: thermal comfort, plant survival rates, water efficiency, long-term maintenance cost. Every recommendation we make is one we can back with data — because in most cases we have collected that data ourselves.</p>
-            <p class="whyus-text reveal reveal-delay-3">We are a small practice by design. Every project is handled directly by us, not delegated. That means consistent quality, fast turnaround, and a single point of contact from first consultation to final handover.</p>
-
-            <div class="research-block reveal">
-                <span class="research-label">Scientific work</span>
-                <h2 class="research-heading">Grounded in research</h2>
-                <p class="research-intro">Our consulting is informed by peer-reviewed research in urban greening, building physics, and nature-based solutions.</p>
-
-                <div class="paper-list">
-                    <!-- Publication 1 -->
-                    <div class="paper-item">
-                        <span class="paper-year">2025</span>
-                        <div>
-                            <a class="paper-title" href="https://doi.org/10.1016/j.buildenv.2025.113399" target="_blank" rel="noopener">
-                                Vertical greenery as natural shading of glass facades: Bioshading coefficients for 4 climbing plant species for assessment of shading performance
-                            </a>
-                            <div class="paper-meta">Poiss M, Briefer A, Scharf B, Spörl P, Stangl R.<br><em>Building and Environment</em>, 283:113399</div>
-                            <span class="paper-type">Journal article</span>
-                        </div>
-                    </div>
-
-                    <!-- Publication 2 -->
-                    <div class="paper-item">
-                        <span class="paper-year">2025</span>
-                        <div>
-                            <a class="paper-title" href="https://nachhaltigwirtschaften.at/de/sdz/projekte/glas-gruen.php" target="_blank" rel="noopener">
-                                GLASGrün-Pflegeleitfaden zum wirksamen Einsatz von Vertikalbegrünungen bei Gebäuden mit Glasflächen
-                            </a>
-                            <div class="paper-meta">Poiss M, Briefer A, Wultsch T, Scharf B, Pitha U, Stangl R.<br><em>Berichte aus Energie- und Umweltforschung</em> 60c/2025. FFG</div>
-                            <span class="paper-type">Project report</span>
-                        </div>
-                    </div>
-
-                    <!-- Publication 3 -->
-                    <div class="paper-item">
-                        <span class="paper-year">2025</span>
-                        <div>
-                            <a class="paper-title" href="https://nachhaltigwirtschaften.at/de/sdz/projekte/glas-gruen.php#publications" target="_blank" rel="noopener">
-                                GLASGrün-Leitfaden und Variantenkatalog zum wirksamen Einsatz von Vertikalbegrünungen bei Gebäuden mit Glasflächen
-                            </a>
-                            <div class="paper-meta">Briefer AK, Poiss M, Wultsch T, Scharf B, Pitha U, Smetschka B et al.<br><em>Berichte aus Energie- und Umweltforschung</em> 60b/2025. FFG</div>
-                            <span class="paper-type">Project report</span>
-                        </div>
-                    </div>
-
-                    <!-- Publication 4 -->
-                    <div class="paper-item">
-                        <span class="paper-year">2025</span>
-                        <div>
-                            <a class="paper-title" href="https://nachhaltigwirtschaften.at/de/sdz/projekte/glas-gruen.php#publications" target="_blank" rel="noopener">
-                                GLASGrün: Regulierung von Klima, Energiebedarf und Wohlbefinden in Glasverbauten durch bautechnisch integriertes, vertikales Grün
-                            </a>
-                            <div class="paper-meta">Stangl R, Briefer AK, Poiss M, Wultsch T, Scharf B, Pitha U et al.<br><em>Berichte aus Energie- und Umweltforschung</em>. FFG</div>
-                            <span class="paper-type">Project report</span>
-                        </div>
-                    </div>
-
-                    <!-- Publication 5 -->
-                    <div class="paper-item">
-                        <span class="paper-year">2026</span>
-                        <div>
-                            <a class="paper-title" href="https://journal.ifm.tuwien.ac.at/issue/86/galley/88/view/" target="_blank" rel="noopener">
-                                High-Performance Climbing Plants for Urban Climate Improvement: Maintenance Strategies for Climbing Plants in Vertical Greening Systems
-                            </a>
-                            <div class="paper-meta">Briefer A, Poiss M, Stangl R.<br><em>Journal für Facility Management</em>, 1(27/2025):66-83</div>
-                            <span class="paper-type">Journal article</span>
-                        </div>
-                    </div>
-
-                    <!-- Publication 6 -->
-                    <div class="paper-item">
-                        <span class="paper-year">2025</span>
-                        <div>
-                            <span class="paper-title">
-                                Grün vor Glas: Nachrüstbare Verschattungssysteme mit Kletterpflanzen
-                            </span>
-                            <div class="paper-meta">Briefer A, Poiss M, Smetschka B, Pitha U, Scharf B, Stangl R.<br><em>Neue Landschaft</em>, 10/2025:27-32</div>
-                            <span class="paper-type">Journal article</span>
-                        </div>
-                    </div>
-
-                    <!-- Publication 7 -->
-                    <div class="paper-item">
-                        <span class="paper-year">2025</span>
-                        <div>
-                            <span class="paper-title">
-                                Ein Modell für klimaresiliente Stadtentwicklung
-                            </span>
-                            <div class="paper-meta">Briefer A, Poiss M, Stangl R.<br><em>Galabau Journal</em>, 3/2025:7-11</div>
-                            <span class="paper-type">Journal article</span>
-                        </div>
-                    </div>
-
-                    <!-- Publication 8 -->
-                    <div class="paper-item">
-                        <span class="paper-year">2026</span>
-                        <div>
-                            <a class="paper-title" href="https://doi.org/10.1093/forestry/cpaf056" target="_blank" rel="noopener">
-                                Unveiling drought stress in conifers: canopy temperature and transpiration monitoring in a controlled setting
-                            </a>
-                            <div class="paper-meta">Gräf M, Hietz P, Stangl R, Poiss M, D’Urso G, Lederbauer S et al.<br><em>Forestry</em>, 99(2)</div>
-                            <span class="paper-type">Journal article</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SOFTWARE PAGE -->
-    <div id="software" class="page">
-        <section id="software-hero">
-            <div class="software-hero-content">
-                <h1 class="software-hero-title">Our Software</h1>
-                <p class="software-hero-desc">Tools for designing, analysing, and implementing building-integrated greening systems.</p>
-            </div>
-        </section>
-
-        <div class="software-tools">
-            <div class="tool-section reveal">
-                <div class="tool-header">
-                    <h2 class="tool-name">AquaCalc</h2>
-                    <p class="tool-description">FAO-56 species and site-specific water demand calculator. Feel free to explore: <a href="https://aquacalc.whacka.app/" target="_blank">https://aquacalc.whacka.app/</a></p>
-                </div>
-                <div class="tool-screenshots">
-                    <div class="screenshot">
-                        <img src="AquaCalc1.PNG" alt="AquaCalc screenshot 1" onerror="this.parentElement.textContent='Screenshot 1'">
-                    </div>
-                    <div class="screenshot">
-                        <img src="AquaCalc2.PNG" alt="AquaCalc screenshot 2" onerror="this.parentElement.textContent='Screenshot 2'">
-                    </div>
-                    <div class="screenshot">
-                        <img src="AquaCalc3.PNG" alt="AquaCalc screenshot 3" onerror="this.parentElement.textContent='Screenshot 3'">
-                    </div>
-                </div>
-            </div>
-
-            <div class="tool-section reveal reveal-delay-1">
-                <div class="tool-header">
-                    <h2 class="tool-name">GreenSight</h2>
-                    <p class="tool-description">On-site plant coverage measurement.</p>
-                </div>
-                <div class="tool-screenshots">
-                    <div class="screenshot">
-                        <img src="Greensight.PNG" alt="GreenSight screenshot" onerror="this.parentElement.textContent='Screenshot'">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <span>© 2026 Diekmann & Poiss</span>
-        <span>Vienna, Austria</span>
-    </footer>
-
-    <script>
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0, 0);
-            observeReveals();
-        }
-
-        window.addEventListener('scroll', () => {
-            const bg = document.querySelector('.hero-bg');
-            if (!bg) return;
-            const heroH = document.getElementById('hero').offsetHeight;
-            const y = window.scrollY;
-            if (y <= heroH) bg.style.transform = `translateY(${y * 0.3}px)`;
-        }, { passive: true });
-
-        function observeReveals() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(e => {
-                    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-                });
-            }, { threshold: 0.12 });
-            document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
-        }
-
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                window.scrollTo({ top: section.offsetTop - 80, behavior: 'smooth' });
-                setTimeout(observeReveals, 500);
-            }
-        }
-
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY + 200;
-            const sections = ['service-structure','service-soil','service-plants','service-irrigation','service-maintenance'];
-            let activeIndex = -1;
-            sections.forEach((id, index) => {
-                const section = document.getElementById(id);
-                if (section) {
-                    const top = section.offsetTop;
-                    if (scrollPosition >= top && scrollPosition < top + section.offsetHeight) activeIndex = index;
-                }
-            });
-            sections.forEach((id, index) => {
-                const node = document.getElementById(`node-${index + 1}`);
-                if (node) node.classList.toggle('active', index === activeIndex);
-            });
-        });
-
-        observeReveals();
-    </script>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Diekmann &amp; Poiss — Building Greenery Software&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&amp;family=DM+Sans:wght@300;400;500&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--off-white: #f5f3ef;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--dark: #1a1f1c;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--mid: #3d4840;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--muted: #8a9490;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--accent: #6b9e7a;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--border: rgba(26,31,28,0.12);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>html { scroll-behavior: smooth; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: var(--off-white);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--dark);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'DM Sans', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 300;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow-x: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── NAV ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>nav {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: fixed; top: 0; left: 0; right: 0; z-index: 100;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex; justify-content: space-between; align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 1.5rem 3rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>mix-blend-mode: difference;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-logo {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1rem; font-weight: 400;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #fff; letter-spacing: 0.03em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer; background: none; border: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-links { display: flex; gap: 2.5rem; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-links button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.72rem; font-weight: 400; letter-spacing: 0.15em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase; color: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: none; border: none; cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'DM Sans', sans-serif; transition: opacity 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-links button:hover { opacity: 0.6; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── HERO ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#hero {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative; height: 100vh; min-height: 600px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden; display: flex; align-items: flex-end;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hero-bg {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute; inset: 0; background: #2a3d30;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-image: url('LoniceraHeck.JPG');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-size: cover; background-position: center 40%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>will-change: transform;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hero-overlay {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute; inset: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(to bottom, rgba(10,16,12,0.15) 0%, rgba(10,16,12,0.0) 40%, rgba(10,16,12,0.55) 100%);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hero-content {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative; z-index: 2; padding: 0 3rem 3.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%; display: flex; justify-content: space-between; align-items: flex-end;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hero-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(3.5rem, 8vw, 7rem);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 400; line-height: 0.95;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #fff; letter-spacing: -0.02em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hero-title em { font-style: italic; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hero-tagline {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.78rem; font-weight: 400; letter-spacing: 0.18em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase; color: rgba(255,255,255,0.7);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: right; line-height: 1.8; padding-bottom: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hero-scroll {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hero-scroll span {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: rgba(255,255,255,0.5);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.scroll-line {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 1px; height: 48px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: scrollpulse 2s ease-in-out infinite;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes scrollpulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── INTRO ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#intro { padding: 4rem 3rem; border-top: 1px solid var(--border); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.intro-body p {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(1.5rem, 3vw, 2.2rem);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 400; line-height: 1.45; color: var(--dark); max-width: 680px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── IMAGE BAND ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.image-band {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 55vh; min-height: 360px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden; border-top: 1px solid var(--border); position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.image-band img {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%; height: 100%; object-fit: cover; object-position: center 60%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: block; filter: saturate(0.85);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.band-caption {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute; bottom: 1.5rem; right: 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: rgba(255,255,255,0.5);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── SERVICES ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#services { padding: 5rem 3rem 4rem; border-top: 1px solid var(--border); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.services-header { margin-bottom: 4rem; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.section-label {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--muted); margin-bottom: 0.75rem; display: block;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.section-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; color: var(--dark); line-height: 1.05;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── CHAIN DIAGRAM ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chain-diagram {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex; align-items: stretch; gap: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chain-diagram::-webkit-scrollbar { display: none; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chain-node {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1; min-width: 0; display: flex; flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer; padding: 2rem 1.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid var(--border); border-right: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: background 0.25s ease; color: inherit;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chain-node:last-child { border-right: 1px solid var(--border); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chain-node:hover { background: rgba(107,158,122,0.06); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chain-node.active { background: var(--dark); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chain-node.active .chain-num,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chain-node.active .chain-title { color: #fff; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chain-node.active .chain-arrow { color: rgba(255,255,255,0.3); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chain-num {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--muted); margin-bottom: 2rem; transition: color 0.25s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chain-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.05rem; font-weight: 400; color: var(--dark);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.25; flex: 1; transition: color 0.25s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chain-arrow {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 2rem; font-size: 1rem; color: rgba(107,158,122,0.5);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: color 0.25s, transform 0.25s; display: block; line-height: 1;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chain-node:hover .chain-arrow { transform: translateX(3px); color: var(--accent); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chain-node.active .chain-arrow { transform: translateX(3px); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── SERVICE DETAIL SECTIONS ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.service-detail {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 4rem 3rem; border-top: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.detail-header { grid-column: 1 / -1; margin-bottom: 2rem; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.detail-number {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block; font-size: 0.65rem; letter-spacing: 0.15em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase; color: var(--muted); margin-right: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.detail-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline; font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 400; color: var(--dark);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.detail-tagline {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: block; margin-top: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.85rem; color: var(--muted); letter-spacing: 0.05em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.detail-body { display: contents; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.detail-content { padding-right: 2rem; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.detail-text { font-size: 0.95rem; line-height: 1.75; color: var(--muted); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.detail-image {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px; overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid var(--border); aspect-ratio: 16 / 10;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.detail-image img {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.detail-image:hover img { transform: scale(1.05); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── CONTACT ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#contact { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.contact-left {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 5rem 3rem; background: var(--dark); color: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex; flex-direction: column; justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.contact-kicker {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: rgba(255,255,255,0.4); margin-bottom: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.contact-heading {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; line-height: 1.05; letter-spacing: -0.02em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.contact-email {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block; font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1rem; font-weight: 400; color: rgba(255,255,255,0.75);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-decoration: none; letter-spacing: 0.01em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: color 0.2s, border-color 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.contact-email:hover { color: #fff; border-color: rgba(255,255,255,0.6); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.contact-right { border-left: 1px solid var(--border); display: flex; flex-direction: column; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.team-member {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 3rem; border-bottom: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1; display: flex; align-items: flex-start; gap: 2rem; transition: background 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.team-member:last-child { border-bottom: none; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.team-member:hover { background: rgba(107,158,122,0.05); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.member-image-container { flex-shrink: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.member-image {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 120px; height: 120px; border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>object-fit: cover; border: 2px solid var(--accent); display: block;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.member-content { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.member-name {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--dark); margin-bottom: 1rem; line-height: 1.2;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.member-skills { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.skill-badge {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--muted); background: rgba(107,158,122,0.08);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0.5rem 0.9rem; border-radius: 20px; border: 1px solid rgba(107,158,122,0.2);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.member-linkedin {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--muted); text-decoration: none; transition: color 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-flex; align-items: center; gap: 0.5rem; width: fit-content;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.member-linkedin:hover { color: var(--accent); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.member-linkedin::after { content: '↗'; font-size: 0.85em; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── FOOTER ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>footer {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 1.25rem 3rem; border-top: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex; justify-content: space-between; align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>footer span { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--muted); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── PAGE VISIBILITY ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.page { display: none; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.page.active { display: block; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── WHY US PAGE ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#whyus-hero {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative; height: 60vh; min-height: 400px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden; display: flex; align-items: flex-end;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.whyus-hero-bg {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute; inset: 0; background: #2a3d30;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-image: url('TeamPhoto.jpg');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-size: cover; background-position: center 30%;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.whyus-hero-overlay {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute; inset: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(to bottom, rgba(10,16,12,0.1) 0%, rgba(10,16,12,0.0) 30%, rgba(10,16,12,0.65) 100%);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.whyus-hero-content {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative; z-index: 2; padding: 0 3rem 3.5rem; width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.whyus-hero-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(3rem, 7vw, 6rem); font-weight: 400; line-height: 0.95;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #fff; letter-spacing: -0.02em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.whyus-hero-title em { font-style: italic; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.whyus-body { padding: 5rem 3rem; max-width: 860px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.whyus-lead {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 400; line-height: 1.45;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--dark); margin-bottom: 3rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.whyus-text { font-size: 0.95rem; line-height: 1.85; color: var(--muted); margin-bottom: 1.5rem; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── RESEARCH SECTION ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.research-block { margin-top: 4rem; padding-top: 4rem; border-top: 1px solid var(--border); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.research-label {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--muted); margin-bottom: 0.75rem; display: block;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.research-heading {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 400; color: var(--dark);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 1.5rem; line-height: 1.1;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.research-intro {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.95rem; line-height: 1.85; color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 2.5rem; max-width: 680px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.paper-list { display: flex; flex-direction: column; gap: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.paper-item {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 1.75rem 0; border-top: 1px solid var(--border);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid; grid-template-columns: 56px 1fr; gap: 0 2rem; align-items: start;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.paper-item:last-child { border-bottom: 1px solid var(--border); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.paper-year {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.68rem; letter-spacing: 0.12em; color: var(--muted);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding-top: 0.2rem; white-space: nowrap;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.paper-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 400;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-style: italic; color: var(--dark); line-height: 1.4; margin-bottom: 0.35rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-decoration: none; display: block; transition: color 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>a.paper-title:hover { color: var(--accent); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.paper-meta { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.02em; line-height: 1.5; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.paper-type {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block; font-size: 0.6rem; letter-spacing: 0.1em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase; color: var(--accent);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(107,158,122,0.35); border-radius: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0.2rem 0.5rem; margin-top: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── SOFTWARE PAGE ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#software-hero {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative; height: 60vh; min-height: 400px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden; display: flex; align-items: center; justify-content: flex-start;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #2a3d30 0%, #1a2822 100%);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.software-hero-content { position: relative; z-index: 2; padding: 0 3rem; max-width: 800px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.software-hero-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 400; line-height: 1.05;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #fff; letter-spacing: -0.02em; margin-bottom: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.software-hero-desc { font-size: 1rem; line-height: 1.6; color: rgba(255,255,255,0.75); max-width: 600px; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.software-tools { padding: 5rem 3rem; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tool-section { margin-bottom: 6rem; padding-bottom: 4rem; border-bottom: 1px solid var(--border); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tool-section:last-child { border-bottom: none; margin-bottom: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tool-header { margin-bottom: 3rem; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tool-name {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Playfair Display', serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; color: var(--dark);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.8rem; line-height: 1.1;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tool-description {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.95rem; line-height: 1.7; color: var(--muted); max-width: 700px; margin-bottom: 2.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tool-screenshots { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.screenshot {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 0 0 auto; width: 220px; border-radius: 12px; overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #e8f5f0 0%, #d4f1e4 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid var(--border); display: flex; align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center; color: var(--muted); font-size: 0.85rem; text-align: center; padding: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.screenshot img { width: 100%; height: auto; display: block; object-fit: contain; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.screenshot:has(img[src]) { padding: 0; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── REVEAL ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.reveal.visible { opacity: 1; transform: none; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.reveal-delay-1 { transition-delay: 0.1s; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.reveal-delay-2 { transition-delay: 0.2s; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.reveal-delay-3 { transition-delay: 0.3s; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.reveal-delay-4 { transition-delay: 0.4s; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ── RESPONSIVE ── */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 768px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>nav { padding: 1.2rem 1.5rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.hero-content { padding: 0 1.5rem 2.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.hero-tagline { text-align: left; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>#intro { padding: 3rem 1.5rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>#services { padding: 3.5rem 1.5rem 3rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.chain-node { min-width: 140px; padding: 1.5rem 1.25rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.chain-title { font-size: 0.9rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>#contact { grid-template-columns: 1fr; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.contact-right { border-left: none; border-top: 1px solid var(--border); }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.contact-left { padding: 3.5rem 1.5rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.team-member { padding: 2rem 1.5rem; flex-direction: column; align-items: center; text-align: center; gap: 1rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.member-skills { justify-content: center; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.member-linkedin { justify-content: center; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>footer { padding: 1rem 1.5rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.service-detail { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.detail-content { padding-right: 0; margin-bottom: 2rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.detail-image { aspect-ratio: 16 / 9; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.whyus-hero-content { padding: 0 1.5rem 2.5rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.whyus-body { padding: 3rem 1.5rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.paper-item { grid-template-columns: 1fr; gap: 0.4rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.paper-year { padding-top: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.software-hero-content { padding: 0 1.5rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.software-tools { padding: 3rem 1.5rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.tool-section { margin-bottom: 4rem; padding-bottom: 3rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.tool-screenshots { gap: 1rem; }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.screenshot { width: 140px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;nav&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="nav-logo" onclick="showPage('home')"&gt;Diekmann &amp; Poiss&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="nav-links"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="showPage('whyus')"&gt;Why Us&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="showPage('software')"&gt;Software&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/nav&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- HOME PAGE --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="home" class="page active"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="hero"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="hero-bg" id="heroBg"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="hero-overlay"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="hero-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h1 class="hero-title"&gt;Diekmann&lt;br&gt;&lt;em&gt;&amp; Poiss&lt;/em&gt;&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="hero-tagline"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Building Greenery:&lt;br&gt;Implementation and consulting&lt;br&gt;Development of digital solutions<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="hero-scroll"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span&gt;Scroll&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="scroll-line"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="intro"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="intro-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="reveal"&gt;Planning tools and consulting for living architecture — indoor and outdoor&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="image-band"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;img src="Schwarzau4.JPG" alt="Green Wall Project" onerror="this.parentElement.style.background='#2a3d30'"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="band-caption"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="services"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="services-header reveal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="section-label"&gt;What we do&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="section-title"&gt;Our Areas of Expertise&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="chain-diagram reveal reveal-delay-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="chain-node" id="node-1" onclick="scrollToSection('service-structure')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-num"&gt;01&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-title"&gt;Climbing Aid &amp;amp; Building integration &lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-arrow"&gt;→&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="chain-node" id="node-2" onclick="scrollToSection('service-soil')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-num"&gt;02&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-title"&gt;Soil &amp;amp; Substrate&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-arrow"&gt;→&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="chain-node" id="node-3" onclick="scrollToSection('service-plants')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-num"&gt;03&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-title"&gt;Plants&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-arrow"&gt;→&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="chain-node" id="node-4" onclick="scrollToSection('service-irrigation')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-num"&gt;04&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-title"&gt;Irrigation Technology&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-arrow"&gt;→&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="chain-node" id="node-5" onclick="scrollToSection('service-maintenance')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-num"&gt;05&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-title"&gt;Maintenance&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="chain-arrow"&gt;→&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="service-structure" class="service-detail reveal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="detail-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="detail-number"&gt;01&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="detail-title"&gt;Structure&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="detail-tagline"&gt;Technical Framework &amp; Building Integration&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="detail-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="detail-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="detail-text"&gt;[Placeholder text: Comprehensive structural planning and implementation for vertical greenery systems. Climbing aids, support structures, load calculations, and building integration solutions tailored to your project requirements.]&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="detail-image"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;img src="AquaCalc1.PNG" alt="Structure" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="service-soil" class="service-detail reveal reveal-delay-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="detail-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="detail-number"&gt;02&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="detail-title"&gt;Soil &amp; Substrate&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="detail-tagline"&gt;Growing Medium &amp; Nutrient Systems&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="detail-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="detail-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="detail-text"&gt;[Placeholder text: Expert substrate profiling, drainage systems, and nutrient management for optimal plant growth.]&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="detail-image"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;img src="Soil.jpeg" alt="Soil &amp; Substrate" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="service-plants" class="service-detail reveal reveal-delay-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="detail-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="detail-number"&gt;03&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="detail-title"&gt;Plants&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="detail-tagline"&gt;Botanical Expertise &amp; Species Selection&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="detail-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="detail-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="detail-text"&gt;[Placeholder text: Vegetation selection based on climate, light conditions, and aesthetic requirements.]&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="detail-image"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;img src="Plants.JPG" alt="Plants" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="service-irrigation" class="service-detail reveal reveal-delay-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="detail-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="detail-number"&gt;04&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="detail-title"&gt;Irrigation Technology&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="detail-tagline"&gt;Water Management &amp; Automation&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="detail-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="detail-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="detail-text"&gt;[Placeholder text: Smart irrigation systems, water demand calculation, and automated monitoring for efficient plant hydration.]&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="detail-image"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;img src="IrrigationTech.PNG" alt="Irrigation Technology" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="service-maintenance" class="service-detail reveal reveal-delay-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="detail-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="detail-number"&gt;05&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="detail-title"&gt;Maintenance Expertise&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="detail-tagline"&gt;Long-term Care &amp; Optimization&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="detail-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="detail-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="detail-text"&gt;[Placeholder text: Comprehensive maintenance planning, seasonal care programs, and performance optimization.]&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="detail-image"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;img src="Maintenence.JPG" alt="Maintenance Expertise" onerror="this.parentElement.style.background='#f0f0f0'; this.style.display='none'"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="image-band"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;img src="Wisteria4.JPG" alt="Wisteria plant detail" onerror="this.parentElement.style.background='#2a3d30'"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="band-caption"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="contact"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="contact-left reveal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="contact-kicker"&gt;Get in touch&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2 class="contact-heading"&gt;Let's build&lt;br&gt;something&lt;br&gt;beautiful&lt;br&gt;&lt;em&gt;that works.&lt;/em&gt;&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="mailto:diekmann-poiss@proton.me" class="contact-email"&gt;diekmann-poiss@proton.me&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="contact-right"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="team-member reveal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="member-image-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;img src="ProfileFridi.jpg" alt="Fridtjof Diekmann" class="member-image"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="member-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="member-name"&gt;Fridtjof&lt;br&gt;Diekmann&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="member-skills"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="skill-badge"&gt;Technical implementation of vertical greening&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="skill-badge"&gt;Project coordination &amp; digital implementation&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="skill-badge"&gt;Soil &amp; substrate technology&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="https://www.linkedin.com/in/fridtjof-diekmann-36a61b246" target="_blank" rel="noopener" class="member-linkedin"&gt;LinkedIn&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="team-member reveal reveal-delay-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="member-image-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;img src="ProfileMax.jpg" alt="Max Poiss" class="member-image"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="member-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="member-name"&gt;Max&lt;br&gt;Poiss&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="member-skills"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="skill-badge"&gt;Thermal comfort &amp; nature based solutions&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="skill-badge"&gt;Vegetation technology&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="skill-badge"&gt;Automatisation &amp; data analytics&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="https://www.linkedin.com/in/max-poiss-0866b222b" target="_blank" rel="noopener" class="member-linkedin"&gt;LinkedIn&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- WHY US PAGE --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="whyus" class="page"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="whyus-hero"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="whyus-hero-bg"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="whyus-hero-overlay"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="whyus-hero-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h1 class="whyus-hero-title"&gt;Why&lt;br&gt;&lt;em&gt;us?&lt;/em&gt;&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="whyus-body"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="whyus-lead reveal"&gt;We combine hands-on implementation experience with scientific rigour — two disciplines that rarely sit together in the same room.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="whyus-text reveal reveal-delay-1"&gt;Diekmann &amp; Poiss grew out of years spent at the intersection of landscape architecture, building physics, and data science. We have planned, built, and monitored living wall and green roof systems across a range of building typologies — and used those projects as laboratories for the tools we now offer to clients.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="whyus-text reveal reveal-delay-2"&gt;Our approach is rooted in measurable outcomes: thermal comfort, plant survival rates, water efficiency, long-term maintenance cost. Every recommendation we make is one we can back with data — because in most cases we have collected that data ourselves.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="whyus-text reveal reveal-delay-3"&gt;We are a small practice by design. Every project is handled directly by us, not delegated. That means consistent quality, fast turnaround, and a single point of contact from first consultation to final handover.&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="research-block reveal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="research-label"&gt;Scientific work&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="research-heading"&gt;Grounded in research&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="research-intro"&gt;Our consulting is informed by peer-reviewed research in urban greening, building physics, and nature-based solutions.&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="paper-list"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Publication 1 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="paper-item"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="paper-year"&gt;2025&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;a class="paper-title" href="https://doi.org/10.1016/j.buildenv.2025.113399" target="_blank" rel="noopener"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>Vertical greenery as natural shading of glass facades: Bioshading coefficients for 4 climbing plant species for assessment of shading performance</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="paper-meta"&gt;Poiss M, Briefer A, Scharf B, Spörl P, Stangl R.&lt;br&gt;&lt;em&gt;Building and Environment&lt;/em&gt;, 283:113399&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="paper-type"&gt;Journal article&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Publication 2 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="paper-item"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="paper-year"&gt;2025&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;a class="paper-title" href="https://nachhaltigwirtschaften.at/de/sdz/projekte/glas-gruen.php" target="_blank" rel="noopener"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>GLASGrün-Pflegeleitfaden zum wirksamen Einsatz von Vertikalbegrünungen bei Gebäuden mit Glasflächen</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="paper-meta"&gt;Poiss M, Briefer A, Wultsch T, Scharf B, Pitha U, Stangl R.&lt;br&gt;&lt;em&gt;Berichte aus Energie- und Umweltforschung&lt;/em&gt; 60c/2025. FFG&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="paper-type"&gt;Project report&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Publication 3 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="paper-item"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="paper-year"&gt;2025&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;a class="paper-title" href="https://nachhaltigwirtschaften.at/de/sdz/projekte/glas-gruen.php#publications" target="_blank" rel="noopener"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>GLASGrün-Leitfaden und Variantenkatalog zum wirksamen Einsatz von Vertikalbegrünungen bei Gebäuden mit Glasflächen</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="paper-meta"&gt;Briefer AK, Poiss M, Wultsch T, Scharf B, Pitha U, Smetschka B et al.&lt;br&gt;&lt;em&gt;Berichte aus Energie- und Umweltforschung&lt;/em&gt; 60b/2025. FFG&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="paper-type"&gt;Project report&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Publication 4 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="paper-item"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="paper-year"&gt;2025&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;a class="paper-title" href="https://nachhaltigwirtschaften.at/de/sdz/projekte/glas-gruen.php#publications" target="_blank" rel="noopener"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>GLASGrün: Regulierung von Klima, Energiebedarf und Wohlbefinden in Glasverbauten durch bautechnisch integriertes, vertikales Grün</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="paper-meta"&gt;Stangl R, Briefer AK, Poiss M, Wultsch T, Scharf B, Pitha U et al.&lt;br&gt;&lt;em&gt;Berichte aus Energie- und Umweltforschung&lt;/em&gt;. FFG&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="paper-type"&gt;Project report&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Publication 5 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="paper-item"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="paper-year"&gt;2026&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;a class="paper-title" href="https://journal.ifm.tuwien.ac.at/issue/86/galley/88/view/" target="_blank" rel="noopener"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>High-Performance Climbing Plants for Urban Climate Improvement: Maintenance Strategies for Climbing Plants in Vertical Greening Systems</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="paper-meta"&gt;Briefer A, Poiss M, Stangl R.&lt;br&gt;&lt;em&gt;Journal für Facility Management&lt;/em&gt;, 1(27/2025):66-83&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="paper-type"&gt;Journal article&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Publication 6 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="paper-item"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="paper-year"&gt;2025&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="paper-title"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>Grün vor Glas: Nachrüstbare Verschattungssysteme mit Kletterpflanzen</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="paper-meta"&gt;Briefer A, Poiss M, Smetschka B, Pitha U, Scharf B, Stangl R.&lt;br&gt;&lt;em&gt;Neue Landschaft&lt;/em&gt;, 10/2025:27-32&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="paper-type"&gt;Journal article&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Publication 7 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="paper-item"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="paper-year"&gt;2025&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="paper-title"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>Ein Modell für klimaresiliente Stadtentwicklung</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="paper-meta"&gt;Briefer A, Poiss M, Stangl R.&lt;br&gt;&lt;em&gt;Galabau Journal&lt;/em&gt;, 3/2025:7-11&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="paper-type"&gt;Journal article&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Publication 8 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="paper-item"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="paper-year"&gt;2026&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;a class="paper-title" href="https://doi.org/10.1093/forestry/cpaf056" target="_blank" rel="noopener"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>Unveiling drought stress in conifers: canopy temperature and transpiration monitoring in a controlled setting</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="paper-meta"&gt;Gräf M, Hietz P, Stangl R, Poiss M, D’Urso G, Lederbauer S et al.&lt;br&gt;&lt;em&gt;Forestry&lt;/em&gt;, 99(2)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="paper-type"&gt;Journal article&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- SOFTWARE PAGE --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="software" class="page"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="software-hero"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="software-hero-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h1 class="software-hero-title"&gt;Our Software&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="software-hero-desc"&gt;Tools for designing, analysing, and implementing building-integrated greening systems.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="software-tools"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="tool-section reveal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="tool-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2 class="tool-name"&gt;AquaCalc&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="tool-description"&gt;FAO-56 species and site-specific water demand calculator. Feel free to explore: &lt;a href="https://aquacalc.whacka.app/" target="_blank"&gt;https://aquacalc.whacka.app/&lt;/a&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="tool-screenshots"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="screenshot"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;img src="AquaCalc1.PNG" alt="AquaCalc screenshot 1" onerror="this.parentElement.textContent='Screenshot 1'"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="screenshot"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;img src="AquaCalc2.PNG" alt="AquaCalc screenshot 2" onerror="this.parentElement.textContent='Screenshot 2'"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="screenshot"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;img src="AquaCalc3.PNG" alt="AquaCalc screenshot 3" onerror="this.parentElement.textContent='Screenshot 3'"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="tool-section reveal reveal-delay-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="tool-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2 class="tool-name"&gt;GreenSight&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="tool-description"&gt;On-site plant coverage measurement.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="tool-screenshots"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="screenshot"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;img src="Greensight.PNG" alt="GreenSight screenshot" onerror="this.parentElement.textContent='Screenshot'"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;footer&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;© 2026 Diekmann &amp; Poiss&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;Vienna, Austria&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/footer&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function showPage(pageId) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.page').forEach(p =&gt; p.classList.remove('active'));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById(pageId).classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>window.scrollTo(0, 0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>observeReveals();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.addEventListener('scroll', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const bg = document.querySelector('.hero-bg');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!bg) return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const heroH = document.getElementById('hero').offsetHeight;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const y = window.scrollY;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (y &lt;= heroH) bg.style.transform = `translateY(${y * 0.3}px)`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}, { passive: true });</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function observeReveals() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const observer = new IntersectionObserver((entries) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>entries.forEach(e =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, { threshold: 0.12 });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.reveal:not(.visible)').forEach(el =&gt; observer.observe(el));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function scrollToSection(sectionId) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const section = document.getElementById(sectionId);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (section) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>window.scrollTo({ top: section.offsetTop - 80, behavior: 'smooth' });</p>
+<p class="p1"><span class="Apple-converted-space">                </span>setTimeout(observeReveals, 500);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.addEventListener('scroll', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const scrollPosition = window.scrollY + 200;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const sections = ['service-structure','service-soil','service-plants','service-irrigation','service-maintenance'];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let activeIndex = -1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>sections.forEach((id, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const section = document.getElementById(id);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (section) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const top = section.offsetTop;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (scrollPosition &gt;= top &amp;&amp; scrollPosition &lt; top + section.offsetHeight) activeIndex = index;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>sections.forEach((id, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const node = document.getElementById(`node-${index + 1}`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (node) node.classList.toggle('active', index === activeIndex);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>observeReveals();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
 </body>
 </html>
